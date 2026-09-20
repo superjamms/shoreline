@@ -1,0 +1,596 @@
+/* ==========================================================================
+   Shoreline Brewery Open Jam — site styles
+
+   Built to sit next to shorelinebrewery.com without pretending to be it.
+   Two things are borrowed deliberately:
+
+   Palette — straight off the bowtie logo. Orange #FC5000, navy #13216A,
+   white ground. Nothing else is invented.
+
+   Type — the brewery's site runs on Adobe Fonts (Adobe Garamond Pro for
+   headings, Bebas Neue for labels, DIN Condensed for meta, Proxima Nova for
+   body). Typekit needs a paid kit tied to a domain, so each face is matched
+   to its closest free Google Fonts equivalent:
+
+       adobe-garamond-pro  ->  EB Garamond    (same Garamond skeleton)
+       bebas-neue          ->  Bebas Neue     (the same face, free)
+       din-condensed-web   ->  Oswald         (condensed grotesque caps)
+       proxima-nova        ->  Montserrat     (geometric humanist sans)
+
+   Everything visual is a custom property in the :root block. The rules
+   below never hard-code a colour, so retuning the tokens moves the site.
+   ========================================================================== */
+
+:root {
+  /* --- brand, sampled from the logo --- */
+  --orange:     #FC5000;
+  --orange-ink: #C33C00;   /* orange dark enough for text on white          */
+  --navy:       #13216A;
+  --navy-deep:  #0C1647;
+
+  /* --- light (default) --- */
+  --paper:      #FFFFFF;   /* page ground                                   */
+  --surface:    #F7F6F3;   /* cards and strips sitting on the ground        */
+  --ink:        #13216A;   /* headings                                      */
+  --body:       #262A31;   /* running text                                  */
+  --muted:      #6B7176;   /* meta, asides — the site's own #8c979a, darker */
+  --rule:       #E2E0DA;   /* hairlines                                     */
+  --accent:     var(--orange-ink);
+  --accent-bg:  #FFF1EA;   /* callout ground                                */
+  --panel-bg:   #13216A;   /* the navy panel                                */
+  --panel-ink:  #FFFFFF;
+  --panel-rule: #3A4585;
+  --panel-mute: #B9C0E4;
+
+  /* --- type --- */
+  --font-display: "EB Garamond", "Adobe Garamond Pro", Garamond, Georgia, serif;
+  --font-label:   "Bebas Neue", "Helvetica Neue", Arial, sans-serif;
+  --font-meta:    Oswald, "Helvetica Neue", Arial, sans-serif;
+  --font-body:    Montserrat, "Helvetica Neue", Arial, sans-serif;
+
+  --measure: 36rem;        /* ~68 characters of running text                */
+  --step-1: 1rem;
+  --step-2: 1.3rem;
+  --step-3: 1.9rem;
+  --step-4: 3rem;
+}
+
+/* Dark, for viewers whose OS asks for it — but an explicit light choice wins. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:      #101321;
+    --surface:    #181C2E;
+    --ink:        #C9D2FF;
+    --body:       #C8CBD2;
+    --muted:      #8D94A5;
+    --rule:       #2A3049;
+    --accent:     #FF7A3D;
+    --accent-bg:  #2C1409;
+    --panel-bg:   #1B2350;
+    --panel-ink:  #F2F4FF;
+    --panel-rule: #3A4585;
+    --panel-mute: #A6AFD9;
+  }
+}
+
+/* Same tokens again, so a data-theme="dark" toggle wins over a light OS. */
+:root[data-theme="dark"] {
+  --paper:      #101321;
+  --surface:    #181C2E;
+  --ink:        #C9D2FF;
+  --body:       #C8CBD2;
+  --muted:      #8D94A5;
+  --rule:       #2A3049;
+  --accent:     #FF7A3D;
+  --accent-bg:  #2C1409;
+  --panel-bg:   #1B2350;
+  --panel-ink:  #F2F4FF;
+  --panel-rule: #3A4585;
+  --panel-mute: #A6AFD9;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--paper);
+  color: var(--body);
+  font-family: var(--font-body);
+  font-size: var(--step-1);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; }
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 10;
+  background: var(--navy);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ---------- top bar ---------- */
+
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding: 1.1rem clamp(1.25rem, 5vw, 2.5rem);
+  border-bottom: 3px solid var(--navy);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-family: var(--font-label);
+  font-size: 1.65rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.wordmark-1 { color: var(--orange); }
+.wordmark-2 { color: var(--ink); }
+
+.sitenav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.4rem;
+}
+
+.sitenav a {
+  font-family: var(--font-meta);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.sitenav a:hover,
+.sitenav a:focus-visible { color: var(--ink); }
+
+.sitenav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--orange);
+}
+
+/* ---------- page frame ---------- */
+
+.sheet {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 2.5rem) 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.masthead h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-4);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+  margin: 0;
+}
+
+.standfirst {
+  max-width: var(--measure);
+  font-size: var(--step-2);
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.standfirst em { font-style: italic; color: var(--ink); }
+
+/* ---------- sections ---------- */
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+section > p,
+section > ul,
+section > ol { max-width: var(--measure); margin: 0; }
+
+.eyebrow {
+  font-family: var(--font-meta);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.21em;
+  color: var(--accent);
+  margin: 0;
+}
+
+h2 {
+  font-family: var(--font-label);
+  font-size: var(--step-3);
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-wrap: balance;
+  margin: -0.35rem 0 0;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0 0 0.35rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover { color: var(--ink); }
+
+b, strong { font-weight: 600; color: var(--ink); }
+
+code {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.08em 0.32em;
+}
+
+/* ---------- ::: facts — the when/where strip ---------- */
+
+.facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.1rem 1.5rem;
+  margin: 0;
+  padding: 1.25rem 1.4rem;
+  background: var(--surface);
+  border-left: 4px solid var(--orange);
+}
+
+.facts dt {
+  font-family: var(--font-meta);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  padding-top: 0.32em;
+}
+
+.facts dd {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+/* ---------- ::: cards ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--orange);
+  padding: 1.1rem 1.2rem 1.25rem;
+}
+
+/* A card portrait bleeds to the card's edges — the padding above is undone. */
+.card img {
+  display: block;
+  width: calc(100% + 2.4rem);
+  max-width: none;          /* the global img cap would stop the bleed */
+  margin: -1.1rem -1.2rem 0.9rem;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.card span {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+/* ---------- ::: steps ---------- */
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0 1rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+}
+
+.step:first-child { padding-top: 0; border-top: 0; }
+
+.step-num {
+  font-family: var(--font-meta);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--orange);
+}
+
+.step p { margin: 0; max-width: var(--measure); }
+
+/* Sub-steps hang off their parent's content column, bulleted rather than numbered. */
+.substeps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 1.1rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--rule);
+}
+
+.substep {
+  display: grid;
+  grid-template-columns: 1.1rem 1fr;
+  gap: 0 0.7rem;
+}
+
+.substep-mark {
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--orange);
+}
+
+.substep h4 {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0 0 0.3rem;
+}
+
+.substep p { margin: 0; max-width: var(--measure); font-size: 0.94rem; }
+
+.aside {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-meta);
+  font-size: 0.82rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+/* ---------- ::: callout ---------- */
+
+.callout {
+  max-width: none;
+  background: var(--accent-bg);
+  border-left: 4px solid var(--orange);
+  padding: 1.05rem 1.3rem;
+  margin: 0;
+}
+
+/* ---------- ::: kicker ---------- */
+
+.kicker {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: var(--measure);
+  margin: 0;
+}
+
+/* ---------- ::: numbers ---------- */
+
+.numbers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.numbers li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0 1rem;
+  align-items: baseline;
+}
+
+.numbers li > span {
+  font-family: var(--font-meta);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--orange);
+}
+
+/* ---------- ::: list ---------- */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: var(--measure);
+}
+
+.list li {
+  position: relative;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.list li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+}
+
+/* ---------- plain lists ---------- */
+
+section ul:not(.numbers):not(.list),
+section ol { padding-left: 1.15rem; }
+
+section li { margin-bottom: 0.4rem; }
+
+/* ---------- the navy panel ---------- */
+
+section.panel {
+  background: var(--panel-bg);
+  color: var(--panel-ink);
+  padding: clamp(1.75rem, 5vw, 2.5rem);
+}
+
+section.panel h2,
+section.panel h3,
+section.panel h4,
+section.panel b,
+section.panel strong { color: var(--panel-ink); }
+
+section.panel .eyebrow { color: var(--orange); }
+
+section.panel a { color: #fff; }
+
+section.panel a:hover { color: var(--orange); }
+
+section.panel .numbers li > span { color: var(--orange); }
+
+section.panel .aside { color: var(--panel-mute); }
+
+section.panel .facts {
+  background: transparent;
+  border-left-color: var(--orange);
+}
+
+section.panel .facts dt { color: var(--panel-mute); }
+section.panel .facts dd { color: var(--panel-ink); }
+
+section.panel .card {
+  background: transparent;
+  border-color: var(--panel-rule);
+  border-top-color: var(--orange);
+}
+
+section.panel .card span { color: var(--panel-ink); }
+
+/* ---------- page-foot section ---------- */
+
+section.footer {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+  font-size: 0.94rem;
+  color: var(--muted);
+}
+
+/* ---------- site footer ---------- */
+
+.sitefooter {
+  border-top: 3px solid var(--navy);
+  padding: 1.6rem clamp(1.25rem, 5vw, 2.5rem) 2.5rem;
+  font-family: var(--font-meta);
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.sitefooter p { margin: 0 0 0.35rem; }
+
+.sitefooter b { color: var(--ink); text-transform: uppercase; }
+
+.fine { font-size: 0.82rem; }
+
+/* ---------- narrow ---------- */
+
+@media (max-width: 34rem) {
+  :root { --step-4: 2.3rem; --step-3: 1.6rem; --step-2: 1.15rem; }
+  .facts { grid-template-columns: 1fr; gap: 0 0; }
+  .facts dt { padding-top: 0.75rem; }
+  .facts dt:first-of-type { padding-top: 0; }
+  .step { grid-template-columns: 1fr; }
+  .step-num { margin-bottom: 0.3rem; }
+  .substeps { padding-left: 0.8rem; }
+}
+
+/* ---------- print ---------- */
+
+@media print {
+  .topbar, .sitenav, .skip { display: none; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .sheet { max-width: none; padding: 0; gap: 1.5rem; }
+  section.panel {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+  }
+  section.panel h2, section.panel h3, section.panel h4, section.panel b { color: #000; }
+  a { color: #000; }
+}

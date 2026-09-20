@@ -1,0 +1,7 @@
+{
+  "//": "content/*.md is a superset of Markdown: ':::' blocks, '===' sections, '^' eyebrows and '@' asides. markdownlint reads those as paragraphs and then complains about the headings and lists next to them, so the rules that fire on the custom syntax are off here. Everything else stays on.",
+  "MD022": false,
+  "MD032": false,
+  "MD041": false,
+  "MD013": false
+}

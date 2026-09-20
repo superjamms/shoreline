@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+._*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Local env / secrets
+.env
+.env.local
+*.local
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Generated build output — docs/ is NOT ignored; GitHub Pages serves the
+# committed files, so `site/build.py` output has to be checked in.
