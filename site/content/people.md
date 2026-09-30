@@ -1,6 +1,6 @@
 ---
 slug: people
-order: 3
+order: 4
 nav: People
 title: The People behind the Jam
 description: Coordinators, house band, regular bands and regulars make the Open Jam possible.

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recap template — Shoreline Brewery Open Jam</title>
+<meta name="description" content="The template a Shoreline Brewery open jam recap is built from — frontmatter, clips, and the setlist blocks for bands, soloists and the open jam.">
+<meta name="theme-color" content="#13216A">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shoreline Brewery Open Jam">
+<meta property="og:title" content="Recap template">
+<meta property="og:description" content="The template a Shoreline Brewery open jam recap is built from — frontmatter, clips, and the setlist blocks for bands, soloists and the open jam.">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;500&family=Montserrat:ital,wght@0,300;0,400;0,600;1,400&display=swap">
+
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+<a class="wordmark" href="../">
+<span class="wordmark-1">Shoreline</span>
+<span class="wordmark-2">Open Jam</span>
+</a>
+<nav class="sitenav" aria-label="Pages">
+<a href="../">Home</a>
+<a href="../events.html" aria-current="page">Events</a>
+<a href="../how-it-works.html">How it works</a>
+<a href="../people.html">People</a>
+<a href="../about.html">About</a>
+<a href="../faq.html">Faq</a>
+</nav>
+</header>
+
+<main class="sheet" id="main">
+
+<header class="masthead">
+<p class="eyebrow">Copy this file · not linked from anywhere</p>
+<h1>Recap template</h1>
+<p class="standfirst">This page is the shape every recap takes. Everything below is placeholder text — copy this file to content/events/YYYY-MM-DD.md, set the frontmatter, and replace the words.</p>
+</header>
+
+<section class="block">
+<p class="callout"><b>This is a template, not a night.</b> It carries <code>draft: true</code>, so it builds but stays out of the nav and out of both event lists. Nothing on it happened.</p>
+<dl class="facts">
+<dt>Copy it</dt><dd><code>cp content/events/template.md content/events/2026-10-13.md</code></dd>
+<dt>Then</dt><dd>set <code>date</code>, <code>title</code>, <code>label</code>, <code>summary</code>; delete <code>draft</code> and <code>slug</code></dd>
+<dt>Slug</dt><dd>leave it out and the filename becomes the URL, so the date is the URL</dd>
+<dt>Rebuild</dt><dd><code>python3 build.py</code></dd>
+</dl>
+</section>
+
+<section class="block">
+<p class="eyebrow">The recap</p>
+<h2>How the night went</h2>
+<p>Two or three paragraphs, written the morning after while it's still fresh. Who turned up, what the room was like, anything worth remembering — a first-timer who got up and shouldn't have been nervous, a song nobody expected to work.</p>
+<p>Name people and bands here. The recap is also the thank-you, so the names matter more than the prose does.</p>
+<p class="kicker">One line to close on — the moment from the night you'd tell someone about.</p>
+</section>
+
+<section class="block">
+<p class="eyebrow">Clips</p>
+<h2>On video</h2>
+<div class="videos">
+<figure class="video"><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/jNQXAC9IVRw" title="Placeholder clip — replace with the night&#x27;s video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><figcaption><span class="video-label">Placeholder clip — replace with the night's video</span><a href="https://www.youtube.com/watch?v=jNQXAC9IVRw" target="_blank" rel="noopener">Watch on YouTube</a></figcaption></figure>
+<figure class="video"><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/jNQXAC9IVRw" title="A second clip sits beside the first" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><figcaption><span class="video-label">A second clip sits beside the first</span><a href="https://youtu.be/jNQXAC9IVRw" target="_blank" rel="noopener">Watch on YouTube</a></figcaption></figure>
+</div>
+<p>Any YouTube link works — <code>watch?v=</code>, a <code>youtu.be</code> share link, a <code>/shorts/</code> or <code>/live/</code> URL, or a playlist. A <code>?t=90</code> or <code>?t=1m30s</code> in the link becomes the start time. The caption is optional, so a line in a <code>::: video</code> block is either:</p>
+<ul class="list">
+<li><code>- **The Turn Ups — Mustang Sally** — https://youtu.be/VIDEOID</code> — captioned</li>
+<li><code>- https://youtu.be/VIDEOID</code> — no caption, just the clip</li>
+</ul>
+<p>A link that isn't YouTube, or that carries no video id, fails the build rather than shipping a blank frame.</p>
+</section>
+
+<section class="block">
+<p class="eyebrow">What got played</p>
+<h2>The setlist</h2>
+<div class="setlist">
+<div class="set"><div class="set-head"><h3>The Turn Ups</h3><span class="set-kind">house band</span></div><ol class="songs">
+<li><span class="song-song">Mustang Sally</span><span class="song-by">Wilson Pickett</span><span class="song-key">C</span></li>
+<li><span class="song-song">Ain't No Sunshine</span><span class="song-by">Bill Withers</span><span class="song-key">Am</span></li>
+<li><span class="song-song">Cissy Strut</span><span class="song-by">The Meters</span><span class="song-key">C</span></li>
+</ol></div>
+<div class="set"><div class="set-head"><h3>Example Guest Band</h3><span class="set-kind">guest band</span></div><ol class="songs">
+<li><span class="song-song">Their own material</span></li>
+<li><span class="song-song">A cover nobody saw coming</span><span class="song-by">Some Artist</span><span class="song-key">G</span></li>
+</ol></div>
+<div class="set"><div class="set-head"><h3>A Soloist</h3><span class="set-kind">solo, backing track</span></div><ol class="songs">
+<li><span class="song-song">Song title</span><span class="song-by">Artist</span></li>
+</ol></div>
+<div class="set"><div class="set-head"><h3>Another Soloist</h3><span class="set-kind">solo, backed by the house band</span></div><ol class="songs">
+<li><span class="song-song">Song title</span><span class="song-by">Artist</span><span class="song-key">E</span></li>
+</ol></div>
+<div class="set"><div class="set-head"><h3>The open jam</h3><span class="set-kind">open jam</span></div><ol class="songs">
+<li><span class="song-song">Folsom Prison Blues</span><span class="song-by">Johnny Cash</span><span class="song-key">E</span></li>
+<li><span class="song-song">Green Onions</span><span class="song-by">Booker T. &amp; the M.G.'s</span><span class="song-key">F</span></li>
+<li><span class="song-song">Something in a blues in A</span><span class="song-key">A</span></li>
+</ol></div>
+</div>
+<p>One <code>###</code> row per act. The part after the em dash is the kind of act — <em>house band</em>, <em>guest band</em>, <em>solo</em>, <em>open jam</em>, or anything else that describes it — and it becomes the tag beside the name. Each song is up to three fields — title, artist, key — separated by <code>·</code>:</p>
+<ul class="list">
+<li><code>- Song title · Artist · Key</code> — all three</li>
+<li><code>- Song title · Artist</code> — no key</li>
+<li><code>- Song title</code> — just the title</li>
+<li><code>- Song title ·  · Key</code> — a key but no artist: leave the middle field empty</li>
+</ul>
+<p>Artist and key are both optional, because half the time nobody wrote them down.</p>
+</section>
+
+<section class="panel">
+<p class="eyebrow">Frontmatter</p>
+<h2>What each key does</h2>
+<dl class="facts">
+<dt>date</dt><dd><code>YYYY-MM-DD</code>. Required. Decides upcoming vs. recap, and the sort order</dd>
+<dt>title</dt><dd>the <code>&lt;h1&gt;</code> on the page</dd>
+<dt>label</dt><dd>the short name in the schedule and recap lists. Defaults to <code>title</code></dd>
+<dt>note</dt><dd>the second line in the <em>upcoming</em> list. Usually the timing</dd>
+<dt>summary</dt><dd>the second line in the <em>recaps</em> list. One sentence about the night</dd>
+<dt>eyebrow</dt><dd>the small orange line above the <code>&lt;h1&gt;</code></dd>
+<dt>standfirst</dt><dd>the intro paragraph under the <code>&lt;h1&gt;</code></dd>
+<dt>description</dt><dd>meta description and social-preview text</dd>
+<dt>draft</dt><dd><code>true</code> builds the page but hides it from the nav and both lists</dd>
+</dl>
+<p>Before the night, a page needs only <code>date</code>, <code>title</code> and <code>note</code>. The recap, the clips and the setlist get added the next morning.</p>
+</section>
+
+<section class="footer">
+<p>Back to <a href="../events.html">all dates and recaps</a>.</p>
+</section>
+
+</main>
+
+<footer class="sitefooter">
+<p><b>Shoreline Brewery Open Jam</b> · 208 W. Wabash St, Michigan City, IN · Tuesdays</p>
+<p class="fine">Hosted at <a href="https://www.shorelinebrewery.com/" target="_blank" rel="noopener">Shoreline Brewery</a>. This page is run by the open jam, not by the brewery. © 2026</p>
+</footer>
+
+</body>
+</html>

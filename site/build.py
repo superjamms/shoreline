@@ -8,6 +8,14 @@
 `docs/` is what GitHub Pages serves (Settings -> Pages -> Deploy from a branch ->
 main -> /docs). The output is committed, so a deploy is a `git push`.
 
+Two kinds of page:
+
+    content/*.md         -> docs/*.html         one nav entry each
+    content/events/*.md  -> docs/events/*.html  one night each, kept out of the nav
+
+A file whose name starts with `_` is never built — that's how `_template.md`
+sits in `content/events/` as a thing to copy rather than a page.
+
 No third-party packages. The markdown subset understood here is deliberately
 small — just what these pages use. The conventions are documented in README.md;
 the short version:
@@ -18,6 +26,7 @@ the short version:
     ## text        section heading
     ::: name       a structured block, closed by a bare :::
     @ text         inside ::: steps, the aside line for a step
+    /x.html        a link to x.html at the site root, from any depth
 """
 
 import argparse
@@ -28,10 +37,26 @@ import os
 import re
 import shutil
 import sys
+import urllib.parse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CONTENT = os.path.join(HERE, "content")
+EVENT_DIR = os.path.join(CONTENT, "events")
 DEFAULT_OUT = os.path.join(HERE, os.pardir, "docs")
+
+# --------------------------------------------------------------------------
+# per-page render state
+#
+# Rendering a page needs two things its own markdown doesn't carry: where the
+# page sits relative to the site root, so a "/x.html" link resolves from any
+# depth, and the list of events, so the schedule and recap blocks can build
+# themselves. build() sets both once per page instead of threading them through
+# every renderer.
+# --------------------------------------------------------------------------
+
+ROOT = ""                       # "" on a top-level page, "../" inside events/
+EVENTS = []                     # every event page, oldest night first
+TODAY = datetime.date.today()
 
 # --------------------------------------------------------------------------
 # inline markdown
@@ -55,7 +80,7 @@ def inline(text):
     out = CODE_RE.sub(lambda m: keep(f"<code>{m.group(1)}</code>"), out)
     out = LINK_RE.sub(
         lambda m: keep(
-            f'<a href="{html.escape(m.group(2), quote=True)}"'
+            f'<a href="{html.escape(site_href(m.group(2)), quote=True)}"'
             f'{external(m.group(2))}>{m.group(1)}</a>'
         ),
         out,
@@ -73,6 +98,17 @@ def external(href):
     if href.startswith(("http://", "https://")):
         return ' target="_blank" rel="noopener"'
     return ""
+
+
+def site_href(href):
+    """'/x.html' means x.html at the site root, whatever depth the page is at.
+
+    Without this an event page would have to write '../how-it-works.html' and a
+    top-level page './how-it-works.html' for the same destination.
+    """
+    if href.startswith("/"):
+        return (ROOT + href.lstrip("/")) or "./"
+    return href
 
 
 # --------------------------------------------------------------------------
@@ -150,7 +186,7 @@ def render_cards(lines):
         if match:
             item = item[match.end():]
             portrait = (
-                f'<img src="{html.escape(match.group(2), quote=True)}" '
+                f'<img src="{html.escape(site_href(match.group(2)), quote=True)}" '
                 f'alt="{html.escape(match.group(1), quote=True)}" loading="lazy">'
             )
         label, text = split_label(item, "cards")
@@ -241,6 +277,270 @@ def render_steps(lines):
     return '<div class="steps">\n' + "\n".join(out) + "\n</div>"
 
 
+# ---------------- ::: video ----------------
+
+# Every YouTube URL shape a phone or a browser will hand you, reduced to an id.
+YT_HOSTS = ("youtube.com", "m.youtube.com", "youtube-nocookie.com", "youtu.be")
+YT_PATHS = ("/embed/", "/shorts/", "/live/", "/v/")
+YT_ID_RE = re.compile(r"^[\w-]{11}$")
+YT_TIME_RE = re.compile(r"^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$")
+
+
+def yt_start(value):
+    """'90', '1m30s' and '1h02m03s' all mean a number of seconds."""
+    if value.isdigit():
+        return int(value)
+    match = YT_TIME_RE.fullmatch(value)
+    if not match or not any(match.groups()):
+        return 0
+    hours, minutes, seconds = (int(g or 0) for g in match.groups())
+    return hours * 3600 + minutes * 60 + seconds
+
+
+def youtube_embed(url, where):
+    """Any YouTube link -> an embed src on the no-cookie host.
+
+    Pasting whatever the share sheet produced should work, so watch?v=, youtu.be,
+    /shorts/, /live/ and a playlist link are all accepted. Anything else is a
+    typo worth failing the build over rather than shipping a blank frame.
+    """
+    parts = urllib.parse.urlsplit(url)
+    host = parts.netloc.lower()
+    host = host[4:] if host.startswith("www.") else host
+    path = parts.path.rstrip("/")
+    query = urllib.parse.parse_qs(parts.query)
+
+    if host not in YT_HOSTS:
+        sys.exit(f"{where}: ::: video — not a YouTube link:\n  {url}")
+
+    video = ""
+    if host == "youtu.be":
+        video = path.lstrip("/")
+    elif path == "/watch":
+        video = (query.get("v") or [""])[0]
+    else:
+        for prefix in YT_PATHS:
+            if path.startswith(prefix):
+                video = path[len(prefix):]
+                break
+
+    playlist = (query.get("list") or [""])[0]
+    if video and not YT_ID_RE.match(video):
+        sys.exit(f"{where}: ::: video — '{video}' is not an 11-character video id:\n  {url}")
+    if not video and not playlist:
+        sys.exit(f"{where}: ::: video — no video id or playlist in:\n  {url}")
+
+    embed = "https://www.youtube-nocookie.com/embed/"
+    src = embed + (video or "videoseries")
+    args = []
+    if playlist:
+        args.append(("list", playlist))
+    start = yt_start((query.get("t") or query.get("start") or [""])[0])
+    if start:
+        args.append(("start", str(start)))
+    if args:
+        src += "?" + urllib.parse.urlencode(args)
+    return src
+
+
+def render_video(lines, where):
+    """One or more embedded clips, each optionally captioned.
+
+    '- **Caption** — url' captions the clip; a bare '- url' doesn't. Either way
+    the caption row carries a plain link out to YouTube, because an embed that
+    the viewer's browser blocks should still leave them somewhere to go.
+    """
+    figures = []
+    for item in list_items(lines):
+        label, url = "", item.strip()
+        if item.lstrip().startswith("**"):
+            label, url = split_label(item, "video")
+            url = url.strip()
+        src = youtube_embed(url, where)
+        title = label or "Open jam clip"
+        caption = f'<span class="video-label">{inline(label)}</span>' if label else ""
+        figures.append(
+            '<figure class="video">'
+            '<div class="video-frame">'
+            f'<iframe src="{html.escape(src, quote=True)}" '
+            f'title="{html.escape(title, quote=True)}" loading="lazy" '
+            'referrerpolicy="strict-origin-when-cross-origin" '
+            'allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" '
+            'allowfullscreen></iframe></div>'
+            f'<figcaption>{caption}'
+            f'<a href="{html.escape(url, quote=True)}" target="_blank" rel="noopener">'
+            'Watch on YouTube</a></figcaption>'
+            "</figure>"
+        )
+    if not figures:
+        sys.exit(f"{where}: ::: video — no links in the block")
+    return '<div class="videos">\n' + "\n".join(figures) + "\n</div>"
+
+
+# ---------------- ::: setlist ----------------
+
+# What got played, grouped by whoever played it:
+#
+#   ### The Turn Ups — house band
+#   - Mustang Sally · Wilson Pickett · C
+#
+# The '###' row is the act and its kind; each song is up to three fields —
+# title, artist, key — separated by '·', or by '|' for anyone whose keyboard
+# makes that easier. Artist and key are both optional, because half the time
+# nobody wrote them down.
+SONG_SEP_RE = re.compile(r"\s*[·|]\s*")
+SONG_FIELDS = ("song", "by", "key")
+
+
+def render_setlist(lines, where):
+    """What got played, grouped by whoever played it."""
+    sets, current = [], None
+
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("### "):
+            title = stripped[4:].strip()
+            kind = ""
+            match = re.match(r"^(.*?)\s+[—–]\s+(.*)$", title)
+            if match:
+                title, kind = match.group(1).strip(), match.group(2).strip()
+            current = {"title": title, "kind": kind, "songs": []}
+            sets.append(current)
+        elif stripped.startswith("- "):
+            if current is None:
+                sys.exit(
+                    f"{where}: ::: setlist — a song needs a '### act' above it:"
+                    f"\n  {stripped[:70]}"
+                )
+            current["songs"].append(stripped[2:].strip())
+        elif stripped:
+            sys.exit(
+                f"{where}: ::: setlist — expected '### act' or '- song':"
+                f"\n  {stripped[:70]}"
+            )
+
+    if not sets:
+        sys.exit(f"{where}: ::: setlist — no '### act' rows in the block")
+
+    out = []
+    for act in sets:
+        kind = (
+            f'<span class="set-kind">{inline(act["kind"])}</span>'
+            if act["kind"]
+            else ""
+        )
+        rows = []
+        for song in act["songs"]:
+            fields = SONG_SEP_RE.split(song)
+            cells = [
+                f'<span class="song-{name}">{inline(value)}</span>'
+                for name, value in zip(SONG_FIELDS, fields)
+                if value.strip()
+            ]
+            rows.append("<li>" + "".join(cells) + "</li>")
+        songs = (
+            '<ol class="songs">\n' + "\n".join(rows) + "\n</ol>"
+            if rows
+            else '<p class="empty">Songs not written down.</p>'
+        )
+        out.append(
+            '<div class="set"><div class="set-head">'
+            f'<h3>{inline(act["title"])}</h3>{kind}</div>{songs}</div>'
+        )
+    return '<div class="setlist">\n' + "\n".join(out) + "\n</div>"
+
+
+# ---------------- ::: schedule and ::: recaps ----------------
+#
+# The only two blocks that build themselves. They read the event pages rather
+# than a hand-kept list, so adding content/events/2026-10-13.md is the whole
+# job of putting that night on the home page.
+
+
+def parse_options(lines, block, allowed, where):
+    options = {}
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            continue
+        match = re.match(r"^(\w+):\s*(.*)$", stripped)
+        if match is None or match.group(1) not in allowed:
+            sys.exit(
+                f"{where}: ::: {block} — takes only "
+                f"{', '.join(k + ':' for k in allowed)}, not:\n  {stripped[:70]}"
+            )
+        options[match.group(1)] = match.group(2).strip()
+    return options
+
+
+def option_limit(options, block, where):
+    raw = options.get("limit", "")
+    if not raw:
+        return None
+    if not raw.isdigit() or raw == "0":
+        sys.exit(
+            f"{where}: ::: {block} — 'limit:' wants a positive whole number, "
+            f"got '{raw}'"
+        )
+    return int(raw)
+
+
+def listed_events():
+    """The events either list may show — a draft is built but never listed."""
+    return [e for e in EVENTS if not e["draft"]]
+
+
+def event_rows(events, note_of, cls):
+    rows = []
+    for event in events:
+        date = event["date"]
+        note = note_of(event)
+        # The year is noise on this year's dates and necessary on last year's.
+        dow = f"{date:%a}" if date.year == TODAY.year else f"{date:%a} {date.year}"
+        rows.append(
+            f'<li><a href="{html.escape(ROOT + event["href"], quote=True)}">'
+            f'<span class="event-date"><b>{date:%b} {date.day}</b>'
+            f'<span class="event-dow">{dow}</span></span>'
+            f'<span class="event-what"><span class="event-title">'
+            f'{inline(event["label"])}</span>'
+            + (f'<span class="event-note">{inline(note)}</span>' if note else "")
+            + "</span></a></li>"
+        )
+    return f'<ul class="events {cls}">\n' + "\n".join(rows) + "\n</ul>"
+
+
+def render_schedule(lines, where):
+    """The nights still to come, soonest first."""
+    options = parse_options(lines, "schedule", ("limit", "empty"), where)
+    limit = option_limit(options, "schedule", where)
+    upcoming = [e for e in listed_events() if e["date"] >= TODAY]
+    if not upcoming:
+        return (
+            '<p class="empty">'
+            + inline(options.get("empty") or "Next dates going up shortly.")
+            + "</p>"
+        )
+    return event_rows(upcoming[:limit], lambda e: e["meta"].get("note", ""), "upcoming")
+
+
+def render_recaps(lines, where):
+    """The nights already played, most recent first."""
+    options = parse_options(lines, "recaps", ("limit", "empty"), where)
+    limit = option_limit(options, "recaps", where)
+    past = [e for e in reversed(listed_events()) if e["date"] < TODAY]
+    if not past:
+        return (
+            '<p class="empty">'
+            + inline(options.get("empty") or "The first recap goes up soon.")
+            + "</p>"
+        )
+    return event_rows(
+        past[:limit],
+        lambda e: e["meta"].get("summary", "") or "Recap coming soon.",
+        "recaps",
+    )
+
+
 BLOCKS = {
     "cards": render_cards,
     "facts": render_facts,
@@ -249,7 +549,15 @@ BLOCKS = {
     "list": render_list,
     "numbers": render_numbers,
     "steps": render_steps,
+    "video": render_video,
+    "setlist": render_setlist,
+    "schedule": render_schedule,
+    "recaps": render_recaps,
 }
+
+# These four need to know which file they came from, to report a bad link or a
+# stray line against it; the older blocks can't fail in a way that needs it.
+BLOCKS_NEEDING_SOURCE = {"video", "setlist", "schedule", "recaps"}
 
 
 # --------------------------------------------------------------------------
@@ -318,7 +626,10 @@ def render_body(src, where):
                 i += 1
             if i >= len(lines):
                 sys.exit(f"{where}: block '::: {name}' is never closed with a bare ':::'")
-            current["parts"].append(BLOCKS[name](body))
+            if name in BLOCKS_NEEDING_SOURCE:
+                current["parts"].append(BLOCKS[name](body, where))
+            else:
+                current["parts"].append(BLOCKS[name](body))
 
         else:
             pending.append(line)
@@ -330,7 +641,7 @@ def render_body(src, where):
 
 
 def drop_empty(page):
-    """Remove masthead/meta spans whose value is blank.
+    """Remove masthead/meta spans and paragraphs whose value is blank.
 
     Leaving a key out of the frontmatter should make that item disappear, not
     leave an empty <span> behind widening the flex gap.
@@ -344,7 +655,7 @@ def drop_empty(page):
         return "" if not re.sub(r"<[^>]+>", "", inner).strip() else match.group(0)
 
     page = re.sub(r"<span>(.*?)</span>\s*", keep, page, flags=re.S)
-    return re.sub(r'<p class="standfirst">\s*</p>\s*', "", page)
+    return re.sub(r'<p class="(?:standfirst|eyebrow)">\s*</p>\s*', "", page)
 
 
 # --------------------------------------------------------------------------
@@ -352,55 +663,105 @@ def drop_empty(page):
 # --------------------------------------------------------------------------
 
 
+def truthy(value):
+    return value.strip().lower() in ("1", "true", "yes", "on")
+
+
+def source_files(folder):
+    """The markdown in a folder, minus the '_' files that are there to copy."""
+    return sorted(
+        path
+        for path in glob.glob(os.path.join(folder, "*.md"))
+        if not os.path.basename(path).startswith("_")
+    )
+
+
+def read_page(path, is_event):
+    """Turn one markdown file into the page dict the rest of the build uses."""
+    where = os.path.relpath(path, HERE)
+    name = os.path.splitext(os.path.basename(path))[0]
+    with open(path, encoding="utf-8") as f:
+        meta, body = split_frontmatter(f.read())
+
+    slug = meta.get("slug", name)
+    title = meta.get("title", name)
+    folder = "events/" if is_event else ""
+
+    date = None
+    if is_event:
+        raw = meta.get("date", "")
+        try:
+            date = datetime.date.fromisoformat(raw)
+        except ValueError:
+            sys.exit(f"{where}: an event needs 'date: YYYY-MM-DD', not '{raw}'")
+
+    return {
+        "meta": meta,
+        "body": body,
+        "where": where,
+        "slug": slug,
+        # where the built file goes, and how to reach it from the site root
+        "file": f"{folder}{slug}.html",
+        "href": "" if slug == "index" else f"{folder}{slug}.html",
+        # how to get back to the site root from this page
+        "root": "../" if is_event else "",
+        "nav": meta.get("nav", title),
+        "order": int(meta.get("order", 99)),
+        "is_event": is_event,
+        "date": date,
+        # the short name the schedule and recap lists use
+        "label": meta.get("label", title),
+        # which nav entry stays lit while this page is open
+        "parent": "events" if is_event else meta.get("parent", ""),
+        # built, but kept out of the nav and out of both event lists
+        "draft": truthy(meta.get("draft", "")),
+    }
+
+
 def load_pages():
-    """Read every content/*.md into a page dict, ordered for the nav."""
-    paths = sorted(glob.glob(os.path.join(CONTENT, "*.md")))
+    """Read the content into page dicts: the nav pages, then the event pages."""
+    paths = source_files(CONTENT)
     if not paths:
         sys.exit(f"no content: {CONTENT}/*.md is empty")
 
-    pages = []
-    for path in paths:
-        name = os.path.splitext(os.path.basename(path))[0]
-        with open(path, encoding="utf-8") as f:
-            meta, body = split_frontmatter(f.read())
-        slug = meta.get("slug", name)
-        pages.append(
-            {
-                "meta": meta,
-                "body": body,
-                "where": os.path.relpath(path, HERE),
-                "slug": slug,
-                "file": f"{slug}.html",
-                "href": "./" if slug == "index" else f"./{slug}.html",
-                "nav": meta.get("nav", meta.get("title", name)),
-                "order": int(meta.get("order", 99)),
-            }
-        )
+    pages = [read_page(path, False) for path in paths]
+    pages.sort(key=lambda p: (p["order"], p["nav"]))
+
+    events = [read_page(path, True) for path in source_files(EVENT_DIR)]
+    events.sort(key=lambda p: p["date"])
 
     seen = {}
-    for page in pages:
-        if page["slug"] in seen:
+    for page in pages + events:
+        if page["file"] in seen:
             sys.exit(
                 f"two pages both build {page['file']}: "
-                f"{seen[page['slug']]} and {page['where']}"
+                f"{seen[page['file']]} and {page['where']}"
             )
-        seen[page["slug"]] = page["where"]
+        seen[page["file"]] = page["where"]
 
-    pages.sort(key=lambda p: (p["order"], p["nav"]))
-    return pages
+    return pages, events
 
 
 def render_nav(pages, current):
     items = []
     for page in pages:
-        here = ' aria-current="page"' if page is current else ""
-        items.append(f'<a href="{page["href"]}"{here}>{html.escape(page["nav"])}</a>')
+        if page["draft"]:
+            continue
+        lit = page is current or (current["parent"] and page["slug"] == current["parent"])
+        here = ' aria-current="page"' if lit else ""
+        href = (current["root"] + page["href"]) or "./"
+        items.append(
+            f'<a href="{html.escape(href, quote=True)}"{here}>'
+            f'{html.escape(page["nav"])}</a>'
+        )
     return "\n".join(items)
 
 
 def build(args):
+    global ROOT, EVENTS
+
     out_dir = os.path.abspath(args.out or DEFAULT_OUT)
-    pages = load_pages()
+    pages, EVENTS = load_pages()
 
     with open(os.path.join(HERE, "style.css"), encoding="utf-8") as f:
         css = f.read()
@@ -416,15 +777,19 @@ def build(args):
     os.makedirs(out_dir, exist_ok=True)
     written = []
 
-    for page in pages:
+    for page in pages + EVENTS:
         meta = page["meta"]
+        # Every relative URL on the page — the stylesheet, the nav, a "/x.html"
+        # link in the content — is written from here.
+        ROOT = page["root"]
         styles = (
             f"<style>\n{css}\n</style>"
             if args.inline_css
-            else '<link rel="stylesheet" href="./style.css">'
+            else f'<link rel="stylesheet" href="{ROOT}style.css">'
         )
         fields = {
             "lang": meta.get("lang", "en"),
+            "root": ROOT or "./",
             "title": html.escape(meta.get("title", site_title)),
             "site": html.escape(site_title),
             "description": html.escape(meta.get("description", "")),
@@ -446,9 +811,12 @@ def build(args):
             print(f"warning: {page['file']}: unreplaced placeholders: {', '.join(leftover)}")
 
         path = os.path.join(out_dir, page["file"])
+        os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, "w", encoding="utf-8") as f:
             f.write(html_out)
         written.append(path)
+
+    ROOT = ""
 
     if not args.inline_css:
         path = os.path.join(out_dir, "style.css")
@@ -468,7 +836,7 @@ def build(args):
         open(nojekyll, "w").close()
         written.append(nojekyll)
 
-    if not any(p["slug"] == "index" for p in pages):
+    if not any(p["slug"] == "index" and not p["is_event"] for p in pages):
         print("warning: no page has slug 'index' — GitHub Pages will 404 at the site root")
 
     for path in written:

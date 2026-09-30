@@ -4,13 +4,23 @@ The public pages for the open jam, built from Markdown so the words can be
 edited without touching the design.
 
 ```text
-content/        the words             <- edit these
-  about.md        -> docs/index.html
-  how-it-works.md -> docs/how-it-works.html
-style.css       the design            <- and this, to retune the look
-template.html   the page skeleton     <- nav, footer, <head>
-build.py        the renderer          <- no dependencies, stdlib only
+content/          the words                 <- edit these
+  home.md           -> docs/index.html        the dashboard
+  events.md         -> docs/events.html       dates and recaps
+  how-it-works.md   -> docs/how-it-works.html
+  people.md         -> docs/people.html
+  about.md          -> docs/about.html
+  events/           one file per night      <- add one a week
+    template.md       -> docs/events/template.html   (draft: copy this)
+    2026-10-06.md     -> docs/events/2026-10-06.html
+style.css         the design                <- and this, to retune the look
+template.html     the page skeleton         <- nav, footer, <head>
+build.py          the renderer              <- no dependencies, stdlib only
 ```
+
+Top-level pages each get a nav entry. Event pages don't — they're reached from
+the home page and from `events.html`, both of which build their lists from the
+files in `content/events/`.
 
 Output goes to **`../docs/`**, which is what GitHub Pages serves. It is generated
 — don't edit it — but it *is* committed, because Pages serves the committed files.
@@ -68,7 +78,8 @@ instead of running Jekyll over them.
 ## Adding a page
 
 Drop a new file in `content/`. The filename becomes the URL, so
-`content/songlist.md` builds `docs/songlist.html`.
+`content/songlist.md` builds `docs/songlist.html`. A file whose name starts with
+`_` is skipped, so a scratch draft can sit in the folder without shipping.
 
 Frontmatter drives everything outside the body:
 
@@ -81,17 +92,53 @@ Frontmatter drives everything outside the body:
 | `eyebrow` | The small orange line above the `<h1>` |
 | `standfirst` | The larger intro paragraph under the `<h1>` |
 | `description` | Meta description and social-preview text |
+| `draft` | `true` builds the page but keeps it out of the nav and both event lists |
 | `site` | The site name in the header, footer and `<title>`. Set once, on any page |
 
-Exactly one page should carry `slug: index`, or the site root 404s. Today that's
-`about.md` — the about page *is* the front door. If a separate landing page ever
-makes sense, move `slug: index` to it and give `about.md` its own slug.
+Exactly one page should carry `slug: index`, or the site root 404s. That's
+`home.md` — the dashboard.
+
+## Adding an event
+
+One file per Tuesday, in `content/events/`. Name it for the date and the URL
+follows: `content/events/2026-10-13.md` builds `docs/events/2026-10-13.html`.
+
+```sh
+cp content/events/template.md content/events/2026-10-13.md
+```
+
+Then edit the frontmatter — set `date`, `title`, `label` and `note`, and delete
+the `slug` and `draft` lines the template carries. That's the whole job of
+putting the night on the home page: `::: schedule` and `::: recaps` read the
+folder, so nothing else needs touching.
+
+| Key | Does |
+|---|---|
+| `date` | `YYYY-MM-DD`. **Required.** Decides upcoming vs. recap, and the sort order |
+| `title` | The `<h1>` on the event page |
+| `label` | The short name in both lists. Defaults to `title` |
+| `note` | The second line in the **upcoming** list. Usually the timing |
+| `summary` | The second line in the **recaps** list. One sentence about the night |
+
+Plus `eyebrow`, `standfirst`, `description` and `draft`, which mean what they do
+on any other page. Before the night a page needs only `date`, `title` and `note`;
+the recap, the clips and the setlist go in the next morning.
+
+`content/events/template.md` is a live page — `docs/events/template.html` — that
+documents all of this and shows every block rendered. It carries `draft: true`,
+so it builds but is linked from nowhere.
 
 ## Writing in content files
 
 Normal Markdown for paragraphs, `**bold**`, `*italic*`, `[links](url)` and
-`` `code` ``. Off-site links get `target="_blank"` automatically. On top of that
-there are four conventions, all line-based.
+`` `code` ``. Off-site links get `target="_blank"` automatically. There are no
+fenced code blocks — inline `` `code` `` only.
+
+**Link to other pages with a leading slash**: `[how it works](/how-it-works.html)`
+means "how-it-works.html at the site root" and resolves from any depth, so the
+same line works on a top-level page and on an event page one folder down.
+
+On top of that there are four conventions, all line-based.
 
 ### `=== name` starts a section
 
@@ -126,9 +173,54 @@ Closed by a bare `:::`. Each one renders a specific layout:
 | `numbers` | a numbered list | `01/02/03` rows |
 | `steps` | `###` headings, each with an optional `@ aside` line and optional `####` sub-steps | the numbered rows with asides, sub-steps bulleted beneath their step |
 | `kicker` | a paragraph | the italic closing line |
+| `video` | a list of `- **Caption** — youtube-url`, caption optional | embedded clips, two up, each with a link out to YouTube |
+| `setlist` | `### Act — kind` rows, each followed by `- Song · Artist · Key` items | the night's setlist, grouped by act |
+| `schedule` | `limit:` and `empty:` options | the upcoming nights, soonest first — built from `content/events/` |
+| `recaps` | `limit:` and `empty:` options | the past nights, most recent first — built from `content/events/` |
 
-Numbering in `steps` and `numbers` is generated — write the items in order and
-don't hand-number them, or you'll get `01 1.`.
+Numbering in `steps`, `numbers` and `setlist` is generated — write the items in
+order and don't hand-number them, or you'll get `01 1.`.
+
+### `::: video`
+
+Any YouTube URL shape works — `watch?v=`, a `youtu.be` share link, `/shorts/`,
+`/live/`, or a playlist. A `?t=90` or `?t=1m30s` becomes the start time. Embeds
+go to `youtube-nocookie.com` and load lazily. A link that isn't YouTube, or that
+carries no video id, **fails the build** rather than shipping a blank frame.
+
+### `::: setlist`
+
+```text
+### The Turn Ups — house band
+- Mustang Sally · Wilson Pickett · C
+- Cissy Strut · The Meters · C
+
+### A Soloist — solo, backing track
+- Song title · Artist
+```
+
+The text after the em dash on a `###` row is the kind of act — *house band*,
+*guest band*, *solo*, *open jam*, or anything else — and becomes the tag beside
+the name. Each song is up to three `·`-separated fields: title, artist, key
+(`|` works as a separator too, if that's easier to type). Artist and key are
+optional; leave the middle field empty (`Song ·  · A`) to give a key without an
+artist.
+
+### `::: schedule` and `::: recaps`
+
+The only two blocks that build themselves. They read `content/events/`, so the
+lists are never edited by hand. Both take options, one per line:
+
+```text
+::: schedule
+limit: 4
+empty: The next dates go up here as they're set.
+:::
+```
+
+`limit:` caps the number of rows; leave it out for all of them. `empty:` is the
+line shown when there's nothing to list. An event with `draft: true` is skipped
+by both.
 
 ## Retuning the design
 
@@ -165,3 +257,6 @@ Marked `TODO` in the content, all of them waiting on decisions in
   and then it goes everywhere.
 - **The signup form URL** (PLAYBOOK §4), linked from `how-it-works.md`.
 - **The songlist URL** (PLAYBOOK §5), linked from the callout in `how-it-works.md`.
+- **The first real recap.** `content/events/` has the next six Tuesdays as
+  upcoming dates and `template.md` as the shape a recap takes; no night has been
+  written up yet, so both recap lists are showing their `empty:` line.

@@ -495,10 +495,207 @@ code {
   color: var(--orange);
 }
 
+/* ---------- ::: schedule / ::: recaps — the event lists ---------- */
+
+/* One row per night: the date in the meta face on the left, what it was on the
+   right. The whole row is the link, so the target is the row and not the title. */
+
+.events {
+  list-style: none;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.events li { margin: 0; border-bottom: 1px solid var(--rule); }
+
+.events a {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr 1.25rem;
+  gap: 0 1.25rem;
+  align-items: baseline;
+  padding: 0.95rem 0.3rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.events a:hover,
+.events a:focus-visible { background: var(--surface); }
+
+.events a::after {
+  content: "\2192";
+  font-family: var(--font-meta);
+  color: var(--orange);
+  text-align: right;
+}
+
+.event-date {
+  font-family: var(--font-meta);
+  line-height: 1.25;
+}
+
+.event-date b {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--orange);
+  white-space: nowrap;
+}
+
+.event-dow {
+  display: block;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.event-title {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.event-note {
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* Nothing to list yet — say so rather than leaving a gap. */
+.empty {
+  max-width: none;
+  margin: 0;
+  padding: 1rem 1.2rem;
+  background: var(--surface);
+  border-left: 4px solid var(--rule);
+  font-size: 0.94rem;
+  color: var(--muted);
+}
+
+/* ---------- ::: video ---------- */
+
+.videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+}
+
+.video { margin: 0; }
+
+.video-frame {
+  aspect-ratio: 16 / 9;
+  background: var(--navy-deep);
+  border: 1px solid var(--rule);
+}
+
+.video-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.video-label {
+  display: block;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.video figcaption a {
+  font-family: var(--font-meta);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ---------- ::: setlist ---------- */
+
+.setlist {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.set-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.7rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--orange);
+}
+
+.set-head h3 { margin: 0; }
+
+/* What kind of act it was — house band, guest band, solo, open jam. */
+.set-kind {
+  font-family: var(--font-meta);
+  font-size: 0.76rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+.songs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: song;
+}
+
+.songs li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.6rem;
+  margin: 0;
+  padding: 0.38rem 0.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.songs li::before {
+  counter-increment: song;
+  content: counter(song, decimal-leading-zero);
+  flex: none;
+  width: 1.6rem;
+  font-family: var(--font-meta);
+  font-size: 0.8rem;
+  color: var(--orange);
+}
+
+.song-song { font-weight: 600; color: var(--ink); }
+
+.song-by { font-size: 0.9rem; color: var(--muted); }
+
+/* The key is the field a sit-in actually needs, so it gets its own mark. */
+.song-key {
+  margin-left: auto;
+  padding: 0 0.4rem;
+  font-family: var(--font-meta);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+}
+
 /* ---------- plain lists ---------- */
 
-section ul:not(.numbers):not(.list),
-section ol { padding-left: 1.15rem; }
+section ul:not(.numbers):not(.list):not(.events),
+section ol:not(.songs) { padding-left: 1.15rem; }
 
 section li { margin-bottom: 0.4rem; }
 
@@ -542,6 +739,24 @@ section.panel .card {
 
 section.panel .card span { color: var(--panel-ink); }
 
+section.panel .events,
+section.panel .events li { border-color: var(--panel-rule); }
+
+section.panel .events a { color: var(--panel-ink); }
+
+section.panel .events a:hover,
+section.panel .events a:focus-visible { background: rgba(255, 255, 255, 0.06); }
+
+section.panel .event-title { color: var(--panel-ink); }
+section.panel .event-note,
+section.panel .event-dow { color: var(--panel-mute); }
+
+section.panel .empty {
+  background: transparent;
+  border-left-color: var(--panel-rule);
+  color: var(--panel-mute);
+}
+
 /* ---------- page-foot section ---------- */
 
 section.footer {
@@ -578,6 +793,9 @@ section.footer {
   .step { grid-template-columns: 1fr; }
   .step-num { margin-bottom: 0.3rem; }
   .substeps { padding-left: 0.8rem; }
+  .events a { grid-template-columns: 4.5rem 1fr; gap: 0 0.9rem; }
+  .events a::after { display: none; }
+  .song-key { margin-left: 1.6rem; }
 }
 
 /* ---------- print ---------- */
@@ -593,4 +811,7 @@ section.footer {
   }
   section.panel h2, section.panel h3, section.panel h4, section.panel b { color: #000; }
   a { color: #000; }
+  /* An embed is a blank rectangle on paper; the caption link is the useful part. */
+  .video-frame { display: none; }
+  .events a::after { content: ""; }
 }

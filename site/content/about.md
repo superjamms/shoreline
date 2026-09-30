@@ -1,7 +1,6 @@
 ---
-site: Shoreline Brewery Open Jam
-slug: index
-order: 1
+slug: about
+order: 5
 nav: About
 title: About the jam
 eyebrow: 7:30 pm every Tuesday · Michigan City, IN
@@ -83,7 +82,7 @@ It covers what happens in what order, how to get on the list, what to bring,
 and what to do if you want the house band to back you.
 
 ::: numbers
-1. Read [how it works](./how-it-works.html) — five minutes, and you'll know what to expect.
+1. Read [how it works](/how-it-works.html) — five minutes, and you'll know what to expect.
 2. Turn up a little before the start and say hello to the house band.
 3. Play.
 :::

@@ -1,6 +1,6 @@
 ---
 slug: how-it-works
-order: 2
+order: 3
 nav: How it works
 title: How it works
 eyebrow: Read this before your first one

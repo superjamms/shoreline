@@ -14,8 +14,10 @@ tracking, with a phased rollout.
 
 **The public pages live in [site/](site/README.md)** — Markdown in `site/content/`,
 rendered by `site/build.py` into `docs/`, which GitHub Pages serves off `main`.
-Two pages so far: *About* and *How it works*. Styling follows the brewery's own
-site (orange and navy off the bowtie logo, free stand-ins for their Adobe Fonts).
+Five pages — *Home*, *Events*, *How it works*, *People* and *About* — plus one
+page per Tuesday under `site/content/events/`, which the home page and the events
+page build their lists from. Styling follows the brewery's own site (orange and
+navy off the bowtie logo, free stand-ins for their Adobe Fonts).
 
 ## Exposure
 
