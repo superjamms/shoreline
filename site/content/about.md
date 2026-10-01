@@ -29,7 +29,7 @@ band can sit in and run their own material. Someone who just wants to play with
 other people can do that too, without having brought anyone with them.
 
 ::: cards
-- **The house band** — Nate Miller and *The Turn Ups* open the night with a short set, then host the rest of it.
+- **The house band** — Nate Miller and *The Turnups* open the night with a short set, then host the rest of it.
 - **Guest bands** — Full groups sit in for short sets — covers or their own material.
 - **Soloists** — Play to a backing track, or have the house band back you.
 - **Walk-ins** — Turn up with an instrument and get on something. No plan required.

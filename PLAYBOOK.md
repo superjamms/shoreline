@@ -17,7 +17,7 @@ Every fix in here does one job: leave something behind after last call.
   follower list, a four-sentence bio, no events, no songlist, and no record of any
   night that has ever happened. The venue's own site doesn't list the jam at all.
 - **The partnerships are real, but nothing online says so.** They already exist
-  informally: Shoreline as the host venue, the Turn Ups coordinating and hosting
+  informally: Shoreline as the host venue, the Turnups coordinating and hosting
   every week, **Roxy Music** — where the band members work and teach, and where
   some guest bands arrive from via the student programs — and returning guest
   bands like New Groove and Catalyst. None of that is visible from any page. So
@@ -149,7 +149,7 @@ never done this*. Something closer to this:
 
 ```
 Open Jam at Shoreline Brewery — every Tuesday, 7:00 PM.
-Hosted by Nate Miller & the Turn Ups.
+Hosted by Nate Miller & the Turnups.
 
 Full backline provided: guitar and bass amps, keys, drums,
 mics, mixer, DI, and the house PA. Bring your instrument —
@@ -158,7 +158,7 @@ amp? Bring it, we'll make room.
 
 How the night runs: the house band opens, then we work
 through the signup list. Play a solo set, sit in with the
-Turn Ups, bring your whole group, or just tell us you want
+Turnups, bring your whole group, or just tell us you want
 to jam and we'll put you with people. Backing tracks are
 fine — bring your phone, the cable and the adapters are
 already at the board.
@@ -229,7 +229,7 @@ visible to anybody who wasn't there.
 | Partner | The relationship today | What declaring it is worth | Where it's built |
 |---|---|---|---|
 | **Shoreline Brewery** | Lead partner — hosts the night, owns the room, provides the PA, and has a following and an events calendar the jam doesn't appear on | A filled Tuesday, and people who eat and drink while they watch; the jam inherits their reach | Co-host + calendar entry, below |
-| **The Turn Ups** (house band) | The other visible partner — coordinate and host every week, haul in, set up and tear down the entire backline out of their own gear every week, and bring their own gigging followings | Their names, their other bands and their dates in front of the page's audience every week | Recaps in §6; bio in §1 |
+| **The Turnups** (house band) | The other visible partner — coordinate and host every week, haul in, set up and tear down the entire backline out of their own gear every week, and bring their own gigging followings | Their names, their other bands and their dates in front of the page's audience every week | Recaps in §6; bio in §1 |
 | **Roxy Music** | Band members work and teach there, and some guest bands arrive through its student programs. A genuine pipeline, invisible online | A named partner credit both ways, and the best-targeted audience within reach — people who play and have never sat in anywhere | Below |
 | **Guest bands** (New Groove, Catalyst, others) | Turn up with their own material and often their own following, some through Roxy, then leave no trace | Tagged, linked and clipped afterwards, so a visit compounds instead of evaporating | §3 cross-promotion |
 
@@ -498,7 +498,7 @@ one of those needs slot times published. §3 is the breakdown.
 
 ```
 Open Jam — every Tuesday, 7:00 PM. Free.
-Hosted by Nate Miller & the Turn Ups at Shoreline Brewery.
+Hosted by Nate Miller & the Turnups at Shoreline Brewery.
 
 Backline provided: guitar and bass amps, keys, drums, mics,
 mixer, DI, PA. Show up with your instrument and nothing else.
@@ -511,7 +511,7 @@ TONIGHT'S SHAPE
 7:40  Solo slots and sit-ins, 15-20 min each
 9:00  Band slots
 
-Play your own set, sit in with the Turn Ups, or tell us you're
+Play your own set, sit in with the Turnups, or tell us you're
 looking to jam and we'll put you with people.
 
 SIGN UP (optional, walk-ins always welcome) → [form link]
@@ -709,7 +709,7 @@ different update rhythms, and different value.
 
 This is the single most valuable thing on the list, and it's the direct fix for
 "newcomers have no idea what is typically played." It's a standing document, not
-a log: the repertoire the Turn Ups can drop into behind a stranger. Fifty to a
+a log: the repertoire the Turnups can drop into behind a stranger. Fifty to a
 hundred songs is plenty.
 
 It answers a more specific question than "what gets played here," and that's the
@@ -761,7 +761,7 @@ sentence costs nothing and prevents the most likely way this artifact backfires.
 people up — the regulars who sit in cover plenty between them, and that goes
 unrecorded. Giving the sheet a "who can play this" column, or simply letting
 regulars append rows, makes the list describe what the *room* can cover rather
-than just what the Turn Ups can. It also costs nothing: the people who'd fill it
+than just what the Turnups can. It also costs nothing: the people who'd fill it
 in are there every Tuesday anyway.
 
 They're the right people to own it for a second reason. The regulars are what
@@ -814,7 +814,7 @@ own before the next one starts.
 - Settle the start time
 - Rewrite the bio — lead with the full backline, "bring your instrument, that's it"
 - Settle how a backing track gets connected, and say so publicly
-- Name the partners in the bio and pinned post — Shoreline, the Turn Ups, Roxy Music
+- Name the partners in the bio and pinned post — Shoreline, the Turnups, Roxy Music
 - Ask Roxy Music about a flyer, a mention from the teachers, and a co-host slot
 - Create 12 weeks of events
 - Add the brewery as co-host

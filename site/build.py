@@ -24,7 +24,9 @@ the short version:
     === name       opens a section with that CSS class
     ^ text         eyebrow above the section heading
     ## text        section heading
-    ::: name       a structured block, closed by a bare :::
+    - text         a bullet list; '1. text' for a numbered one
+    ::: name       a structured block, closed by a bare ::: (the space is
+                   optional — ':::name' is the same directive)
     @ text         inside ::: steps, the aside line for a step
     /x.html        a link to x.html at the site root, from any depth
 """
@@ -142,15 +144,20 @@ def paragraphs(lines):
     return out
 
 
+# What opens a list item — '- text' or '1. text'. Shared by list_items and by
+# the bare-list branch of render_body, which has to spot one in a section.
+ITEM_RE = re.compile(r"^(-|\d+\.)\s+")
+
+
 def list_items(lines):
     """Collect '- ' or '1. ' items, joining their wrapped continuation lines."""
     items, current = [], None
     for line in lines:
         stripped = line.strip()
-        if re.match(r"^(-|\d+\.)\s+", stripped):
+        if ITEM_RE.match(stripped):
             if current is not None:
                 items.append(" ".join(current))
-            current = [re.sub(r"^(-|\d+\.)\s+", "", stripped)]
+            current = [ITEM_RE.sub("", stripped)]
         elif stripped and current is not None:
             current.append(stripped)
         elif not stripped and current is not None:
@@ -214,9 +221,16 @@ def render_kicker(lines):
     return f'<p class="kicker">{inline(" ".join(paragraphs(lines)))}</p>'
 
 
-def render_list(lines):
-    """A plain bullet list — the one block that asks nothing of its items."""
+def render_list(lines, ordered=False):
+    """A plain bullet list — the one block that asks nothing of its items.
+
+    `ordered` is for a bare `1.` list written straight into a section. The
+    orange bullet `.list` draws would sit where the number belongs, so an
+    ordered list stays an unclassed <ol> and takes the fallback list styling.
+    """
     rows = [f"<li>{inline(item)}</li>" for item in list_items(lines)]
+    if ordered:
+        return "<ol>\n" + "\n".join(rows) + "\n</ol>"
     return '<ul class="list">\n' + "\n".join(rows) + "\n</ul>"
 
 
@@ -381,7 +395,7 @@ def render_video(lines, where):
 
 # What got played, grouped by whoever played it:
 #
-#   ### The Turn Ups — house band
+#   ### The Turnups — house band
 #   - Mustang Sally · Wilson Pickett · C
 #
 # The '###' row is the act and its kind; each song is up to three fields —
@@ -560,6 +574,17 @@ BLOCKS = {
 BLOCKS_NEEDING_SOURCE = {"video", "setlist", "schedule", "recaps"}
 
 
+# The line-based directives, and the name each one carries. The space after the
+# marker is optional — ':::list' and '::: list' are the same intent, and a
+# missing space used to drop the line into the prose, which shipped a literal
+# ':::list' onto the page. A marker that names nothing known now fails the
+# build instead of printing itself.
+SECTION_RE = re.compile(r"^===\s*(\S.*)$")
+EYEBROW_RE = re.compile(r"^\^\s*(\S.*)$")
+HEADING_RE = re.compile(r"^##(?!#)\s*(\S.*)$")
+BLOCK_RE = re.compile(r"^:::\s*(\S.*)$")
+
+
 # --------------------------------------------------------------------------
 # document
 # --------------------------------------------------------------------------
@@ -597,28 +622,33 @@ def render_body(src, where):
         line = lines[i]
         stripped = line.strip()
 
-        if stripped.startswith("=== "):
+        section = SECTION_RE.match(stripped)
+        mark = EYEBROW_RE.match(stripped)
+        heading = HEADING_RE.match(stripped)
+        block = BLOCK_RE.match(stripped)
+
+        if section:
             close_section()
-            current = {"cls": stripped[4:].strip(), "parts": []}
+            current = {"cls": section.group(1).strip(), "parts": []}
             eyebrow = None
 
-        elif stripped.startswith("^ "):
+        elif mark:
             flush_text()
-            eyebrow = stripped[2:].strip()
+            eyebrow = mark.group(1).strip()
 
-        elif stripped.startswith("## "):
+        elif heading:
             flush_text()
             need_section("a '## heading'")
             if eyebrow:
                 current["parts"].append(f'<p class="eyebrow">{inline(eyebrow)}</p>')
                 eyebrow = None
-            current["parts"].append(f"<h2>{inline(stripped[3:].strip())}</h2>")
+            current["parts"].append(f"<h2>{inline(heading.group(1).strip())}</h2>")
 
-        elif stripped.startswith("::: "):
+        elif block:
             flush_text()
-            name = stripped[4:].strip()
+            name = block.group(1).strip()
             if name not in BLOCKS:
-                sys.exit(f"{where}: unknown block '::: {name}' — known: {', '.join(BLOCKS)}")
+                sys.exit(f"{where}: unknown block ':::{name}' — known: {', '.join(BLOCKS)}")
             need_section(f"a '::: {name}' block")
             body, i = [], i + 1
             while i < len(lines) and lines[i].strip() != ":::":
@@ -630,6 +660,43 @@ def render_body(src, where):
                 current["parts"].append(BLOCKS[name](body, where))
             else:
                 current["parts"].append(BLOCKS[name](body))
+
+        elif ITEM_RE.match(stripped):
+            # A list written straight into a section, no '::: list' around it.
+            # It runs to the first line that isn't part of it: a blank line with
+            # no further item after it, or anything that opens something else.
+            flush_text()
+            need_section("a list")
+            ordered = stripped[0].isdigit()
+            body = []
+            while i < len(lines):
+                item_line = lines[i].strip()
+                if not item_line:
+                    nxt = i + 1
+                    while nxt < len(lines) and not lines[nxt].strip():
+                        nxt += 1
+                    if nxt >= len(lines) or not ITEM_RE.match(lines[nxt].strip()):
+                        break
+                    body.append("")  # a gap between items, still one list
+                    i = nxt
+                    continue
+                if item_line.startswith(("=== ", "^ ", "## ", ":::")):
+                    break
+                body.append(lines[i])
+                i += 1
+            current["parts"].append(render_list(body, ordered))
+            continue  # i already sits on the line after the list
+
+        elif stripped.startswith(("===", ":::")):
+            # A marker that named nothing. Either a bare '===', or a ':::'
+            # closing a block that was never opened — the block renderers eat
+            # their own closing fence, so one reaching here is stray. Letting it
+            # through would print the markup onto the page.
+            sys.exit(
+                f"{where}: '{stripped}' opens nothing and closes nothing — "
+                "'=== name' starts a section, ':::name' a block, and a bare "
+                "':::' only closes a block already open above it"
+            )
 
         else:
             pending.append(line)

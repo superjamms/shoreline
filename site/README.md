@@ -130,13 +130,28 @@ so it builds but is linked from nowhere.
 
 ## Writing in content files
 
-Normal Markdown for paragraphs, `**bold**`, `*italic*`, `[links](url)` and
-`` `code` ``. Off-site links get `target="_blank"` automatically. There are no
-fenced code blocks — inline `` `code` `` only.
+Normal Markdown for paragraphs, `**bold**`, `*italic*`, `[links](url)`, `` `code` ``
+and bullet or numbered lists. Off-site links get `target="_blank"` automatically.
+There are no fenced code blocks — inline `` `code` `` only. Lists don't nest.
 
 **Link to other pages with a leading slash**: `[how it works](/how-it-works.html)`
 means "how-it-works.html at the site root" and resolves from any depth, so the
 same line works on a top-level page and on an event page one folder down.
+
+**Lists need no wrapper.** Write one straight under a heading:
+
+```markdown
+## Mach 11
+
+- Core
+- Everlong
+```
+
+A list runs until a blank line with nothing more after it, or until the next
+`===`, `^`, `##` or `:::`; a blank line *between* two items keeps them in one
+list. A `- ` list gets the orange bullets, a `1. ` list gets plain numbers.
+`::: list` renders the same `- ` list as a block, which only matters if you want
+the fence for clarity in a long file.
 
 On top of that there are four conventions, all line-based.
 
@@ -162,7 +177,12 @@ Renders as the condensed uppercase `<h2>`.
 
 ### `::: name` opens a structured block
 
-Closed by a bare `:::`. Each one renders a specific layout:
+Closed by a bare `:::`. The space after the marker is optional, so `:::list` and
+`::: list` are the same directive — that goes for `=== name`, `^ text` and
+`## text` too. A marker that names nothing known **fails the build**, rather
+than printing a stray `:::` onto the page.
+
+Each block renders a specific layout:
 
 | Block | Takes | Renders |
 |---|---|---|
@@ -191,7 +211,7 @@ carries no video id, **fails the build** rather than shipping a blank frame.
 ### `::: setlist`
 
 ```text
-### The Turn Ups — house band
+### The Turnups — house band
 - Mustang Sally · Wilson Pickett · C
 - Cissy Strut · The Meters · C
 

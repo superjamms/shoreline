@@ -65,6 +65,24 @@
 </section>
 
 <section class="block">
+<p class="eyebrow">Lists</p>
+<h2>Who played what</h2>
+<p>A <code>- </code> list needs no wrapper — write it straight under a <code>##</code> and it renders with the orange bullets:</p>
+<ul class="list">
+<li>Core</li>
+<li>Everlong</li>
+<li>Drowning</li>
+</ul>
+<p>A <code>1. </code> list numbers itself the same way. Put a line of prose above the list when the list needs the context — who was on what, where the set was headed:</p>
+<p>Vocals DaleTurnupsill, drums Luke.</p>
+<ul class="list">
+<li>Dead Flowers</li>
+<li>Paint it Black</li>
+</ul>
+<p>Use <code>::: setlist</code> below instead when the night's songs want the artist and the key alongside them. This shape is for the quick morning-after list.</p>
+</section>
+
+<section class="block">
 <p class="eyebrow">Clips</p>
 <h2>On video</h2>
 <div class="videos">
@@ -73,7 +91,7 @@
 </div>
 <p>Any YouTube link works — <code>watch?v=</code>, a <code>youtu.be</code> share link, a <code>/shorts/</code> or <code>/live/</code> URL, or a playlist. A <code>?t=90</code> or <code>?t=1m30s</code> in the link becomes the start time. The caption is optional, so a line in a <code>::: video</code> block is either:</p>
 <ul class="list">
-<li><code>- **The Turn Ups — Mustang Sally** — https://youtu.be/VIDEOID</code> — captioned</li>
+<li><code>- **The Turnups — Mustang Sally** — https://youtu.be/VIDEOID</code> — captioned</li>
 <li><code>- https://youtu.be/VIDEOID</code> — no caption, just the clip</li>
 </ul>
 <p>A link that isn't YouTube, or that carries no video id, fails the build rather than shipping a blank frame.</p>
@@ -83,7 +101,7 @@
 <p class="eyebrow">What got played</p>
 <h2>The setlist</h2>
 <div class="setlist">
-<div class="set"><div class="set-head"><h3>The Turn Ups</h3><span class="set-kind">house band</span></div><ol class="songs">
+<div class="set"><div class="set-head"><h3>The Turnups</h3><span class="set-kind">house band</span></div><ol class="songs">
 <li><span class="song-song">Mustang Sally</span><span class="song-by">Wilson Pickett</span><span class="song-key">C</span></li>
 <li><span class="song-song">Ain't No Sunshine</span><span class="song-by">Bill Withers</span><span class="song-key">Am</span></li>
 <li><span class="song-song">Cissy Strut</span><span class="song-by">The Meters</span><span class="song-key">C</span></li>

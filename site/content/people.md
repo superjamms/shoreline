@@ -10,7 +10,7 @@ description: Coordinators, house band, regular bands and regulars make the Open 
 
 ::: facts
 - **Coordinators** - Planning
-- **House Band** — *The Turn Ups*
+- **House Band** — *The Turnups*
 - **Guest Band** — Local/regional bands you might see at a jam
 - **Regulars** — Folks you are likely to see at a jam
 - **Sponsors** — Organizations backing the jams
@@ -32,7 +32,7 @@ he'll get you a slot.
 
 ^ The House Band
 
-## *The Turn Ups*
+## *The Turnups*
 
 The event leverages a house band to anchor the night:
 

@@ -37,7 +37,7 @@ You'll get a chance to sit in later.
 @ About 45 minutes
 
 ### The house band opens 7:30 pm
-*The Turn Ups* work out a short set, about half an hour, and kick the night off.
+*The Turnups* work out a short set, about half an hour, and kick the night off.
 It also doubles as the sound check for everything that follows.
 @ About 30 minutes
 

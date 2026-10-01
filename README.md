@@ -97,7 +97,7 @@ It gives a venue that can attract different artists, performers, musicians with 
 There's a pattern to who plays on a given night. Four rough categories, and they
 want different things:
 
-1. **The house band opens** — the Turn Ups work out a short set, about half an
+1. **The house band opens** — the Turnups work out a short set, about half an
    hour, and kick off the night
 2. **One or more guest bands sit in** for short sets, playing covers or their own material and
    often bringing some of their own following with them
@@ -153,7 +153,7 @@ The uncertainty element, having players figure out in the moment what to play on
 
 ## Shoreline Brewery Open Jam Main Bio
 
-Open mic / jam night hosted by Nate Miller and the Turn Ups.
+Open mic / jam night hosted by Nate Miller and the Turnups.
 Every Tuesday at 7:00 pm Central Time. Backline provided (guitar, bass, and drums). Play solo, sit in with the house band, or bring your group. Music is the best!
 
 ## Open questions

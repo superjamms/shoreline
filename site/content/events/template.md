@@ -42,6 +42,30 @@ One line to close on — the moment from the night you'd tell someone about.
 
 === block
 
+^ Lists
+
+## Who played what
+
+A `- ` list needs no wrapper — write it straight under a `##` and it renders with
+the orange bullets:
+
+- Core
+- Everlong
+- Drowning
+
+A `1. ` list numbers itself the same way. Put a line of prose above the list when
+the list needs the context — who was on what, where the set was headed:
+
+Vocals DaleTurnupsill, drums Luke.
+
+- Dead Flowers
+- Paint it Black
+
+Use `::: setlist` below instead when the night's songs want the artist and the
+key alongside them. This shape is for the quick morning-after list.
+
+=== block
+
 ^ Clips
 
 ## On video
@@ -56,7 +80,7 @@ Any YouTube link works — `watch?v=`, a `youtu.be` share link, a `/shorts/` or
 start time. The caption is optional, so a line in a `::: video` block is either:
 
 ::: list
-- `- **The Turn Ups — Mustang Sally** — https://youtu.be/VIDEOID` — captioned
+- `- **The Turnups — Mustang Sally** — https://youtu.be/VIDEOID` — captioned
 - `- https://youtu.be/VIDEOID` — no caption, just the clip
 :::
 
@@ -70,7 +94,7 @@ than shipping a blank frame.
 ## The setlist
 
 ::: setlist
-### The Turn Ups — house band
+### The Turnups — house band
 - Mustang Sally · Wilson Pickett · C
 - Ain't No Sunshine · Bill Withers · Am
 - Cissy Strut · The Meters · C
