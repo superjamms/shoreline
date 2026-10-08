@@ -554,10 +554,10 @@ def render_recaps(lines, where):
             + inline(options.get("empty") or "The first recap goes up soon.")
             + "</p>"
         )
+    # No summary means no note line — the recap is the event's own page, so a
+    # "coming soon" placeholder under a night that already happened read wrong.
     return event_rows(
-        past[:limit],
-        lambda e: e["meta"].get("summary", "") or "Recap coming soon.",
-        "recaps",
+        past[:limit], lambda e: e["meta"].get("summary", ""), "recaps"
     )
 
 
