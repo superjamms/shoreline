@@ -8,6 +8,11 @@
 `docs/` is what GitHub Pages serves (Settings -> Pages -> Deploy from a branch ->
 main -> /docs). The output is committed, so a deploy is a `git push`.
 
+Run it again whenever the date rolls over, not just when the markdown changes:
+the ::: schedule and ::: recaps lists are split on TODAY at build time, so an
+event only moves from one list to the other on a rebuild. That's what
+.github/workflows/rebuild.yml does every morning.
+
 Two kinds of page:
 
     content/*.md         -> docs/*.html         one nav entry each
@@ -34,6 +39,7 @@ the short version:
 import argparse
 import datetime
 import glob
+import hashlib
 import html
 import os
 import re
@@ -832,6 +838,12 @@ def build(args):
 
     with open(os.path.join(HERE, "style.css"), encoding="utf-8") as f:
         css = f.read()
+    # GitHub Pages serves every file with `Cache-Control: max-age=600` and that
+    # can't be overridden, so a stylesheet named plain `style.css` keeps being
+    # read out of the browser's disk cache after an edit — the thing a hard
+    # refresh was being used to clear. The query string changes whenever the CSS
+    # does, which makes it a different URL and ends the guessing.
+    css_tag = hashlib.sha256(css.encode("utf-8")).hexdigest()[:10]
     with open(os.path.join(HERE, "template.html"), encoding="utf-8") as f:
         template = f.read()
 
@@ -852,7 +864,7 @@ def build(args):
         styles = (
             f"<style>\n{css}\n</style>"
             if args.inline_css
-            else f'<link rel="stylesheet" href="{ROOT}style.css">'
+            else f'<link rel="stylesheet" href="{ROOT}style.css?v={css_tag}">'
         )
         fields = {
             "lang": meta.get("lang", "en"),

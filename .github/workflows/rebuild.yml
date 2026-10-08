@@ -1,0 +1,40 @@
+# The ::: schedule and ::: recaps lists are split on the build date, so an event
+# only moves from "upcoming" to "recaps" when build.py runs again. Without this,
+# the morning after a jam the site still advertises last night as upcoming until
+# someone happens to push. Rebuild daily and commit only when the HTML changed.
+name: Rebuild dated pages
+
+on:
+  schedule:
+    # 10:00 UTC — early morning in Central time, so the roll-over has happened
+    # by the time anyone looks. GitHub may run a cron late under load.
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+
+# Don't let a manual run and the nightly one push over each other.
+concurrency:
+  group: rebuild-dated-pages
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Render content into docs/
+        run: python3 site/build.py
+
+      - name: Commit if the output moved
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- docs; then
+            echo "No change — nothing to publish."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git commit -m "rebuild: roll schedule and recap dates for $(date -u +%Y-%m-%d)"
+          git push
