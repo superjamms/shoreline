@@ -5,7 +5,8 @@ order: 1
 nav: Home
 title: Open jam, every Tuesday
 eyebrow: 7:30 pm · Shoreline Brewery · Michigan City, IN
-standfirst: Bring an instrument. The backline is already on stage, the house band hosts, and you can play a set, sit in, or just get on something.
+standfirst: Show up.  Bring an instrument. Play.  Perform your own stuff solo, bring a band, or ask the house band to back you.
+We provide the backline, and Shoreline provides the PA.
 description: Weekly open mic and open jam at Shoreline Brewery in Michigan City, Indiana. Upcoming dates, recaps of past nights, and what to expect on your first one.
 ---
 
