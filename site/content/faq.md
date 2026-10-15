@@ -7,7 +7,7 @@ title: Frequently Asked Questions
 
 === block
 
-## Question: I've never been to an open mic/jam before - how does these work?*
+## I've never been to an open mic/jam before - how do these work?
 
 In short, these are usually loosely structured events that allow you, at any level of musicianship,
 to come play your instrument, without fear of mistakes, heckling, or ridicule.
@@ -19,11 +19,11 @@ It is usually best to just come out to an event the first time, without your ins
 Observe, meet the coordinator, house band and the regulars.
 Ask questions, and see if the vibe fits you.
 
-## Question: I'm familiar with open mic/jams, but how does Shoreline Open Jam work?
+## I'm familiar with open mic/jams, but how does Shoreline Open Jam work?
 
-The short answer is:  *Just bring your instrument*.  You'll like get a chance to play, no matter your level.
+The short answer is:  *Just bring your instrument*.  You'll get a chance to play, no matter your level.
 
-The backline (the equipmment supporting the open jam) is immense.  Even if you don't bring your own instrument, it is likely you'll still be able to play (but you will definitely be more comfortable on your own).
+The backline (the equipment supporting the open jam) is immense.  Even if you don't bring your own instrument, it is likely you'll still be able to play (but you will definitely be more comfortable on your own).
 
 The house band includes seasoned working musicians that also teach music.  So you also have a solid backing band if you need it.
 
@@ -50,28 +50,25 @@ On the other hand, the house band comprises seasoned musicians.
 If you come prepared with a chart, that may make the difference between a hard "no",
 and "maybe", meaning, we'll give it a go, but it may not be what you envisioned.
 
-If the house band cannot accomodate you, you can also bring in your own backing tracks on a smart phone or tablet - we can probably get that to work with our Mixer.
+If the house band can't cover it, you can play to your own backing track instead. Bring it on your phone, tablet or laptop, with a cable that ends in a male XLR or 1/4" plug for our mixer. If you can't, contact us before the night and we'll work out what you need.
 
-## Am I required to sign up to play at the Shoreline Open Jam
+## Do I need to sign up before the night?
 
-The short answer is "no".
+No. You can walk in and play. If you just want to jam, show up. Not knowing what you'll play or who with is half the fun.
 
-You can generally walk in to an event and be able to play.
+Sign up ahead if you want to play specific songs, need the house band to back you, or need special gear or backing tracks.
 
-But you may not be able to play to the exact capacity or plan you intended.
+Sets are capped at 20 minutes and other players have plans too, so earlier is better.
 
-We recommend you communicate with us reasonably early before an event so we can best accomodate you as well as the other bands, soloists and walk-ins.
-
-The most proactive way is to use the [online sign-in form](https://forms.gle/bVGYV88FbMveXuuQ7) or talk to us directly on our [Facebook page](https://www.facebook.com/shorelineopenjam).
-
-The next best way is to informally sign up before the house band starts during each event (before 7:30 pm).
+- Best: the online [sign-up form](https://forms.gle/bVGYV88FbMveXuuQ7) or our [Facebook page](https://www.facebook.com/shorelineopenjam).
+- Next best: ask for the coordinator when you arrive, ideally before 7 pm.
+- Arriving late? You can probably still join the open jam. Find the coordinator and we'll fit you in.
 
 ## What gear do I need to bring?
 
 Your instrument.
 
 That's it.
-
 
 We provide the *backline* - the amps, cables, mics, mixer, monitors and lighting.  The venue provides the PA.
 We also host guitar and bass amp modelers with a host of built in effects (FX).

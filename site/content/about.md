@@ -46,8 +46,8 @@ mixer, and DI for bass and guitar — is provided by the house band, hauled
 in and set up every Tuesday.
 
 That means a sit-in only has to bring an instrument that isn't already on stage.
-If you'd rather use your own amp or pedalboard, that's fine too, and the board
-will take a backing track off your phone or laptop.
+If you'd rather use your own amp or pedalboard, that's fine too. Playing to a
+backing track? Bring your device and a cable ending in a male XLR or 1/4" plug.
 
 ::: callout
 The house band are working musicians who gig across several bands and teach

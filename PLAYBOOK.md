@@ -160,8 +160,8 @@ How the night runs: the house band opens, then we work
 through the signup list. Play a solo set, sit in with the
 Turnups, bring your whole group, or just tell us you want
 to jam and we'll put you with people. Backing tracks are
-fine — bring your phone, the cable and the adapters are
-already at the board.
+fine — bring your phone and a cable ending in a male XLR
+or 1/4" plug.
 
 First time? Say so at the bar and we'll put you somewhere
 comfortable. You don't need a band, a set, or gear.
@@ -188,8 +188,8 @@ hauling gear to a bar on a work night for a slot they aren't sure they'll get.
 The line about welcoming your own pedalboard matters for the opposite reason: it
 tells a gigging player that showing up properly equipped won't be treated as a
 nuisance. And the board takes a backing track, which quietly extends the same
-promise to solo acts: a singer with tracks on their phone is a complete act on
-that stage without carrying anything either.
+promise to solo acts: a singer with tracks on their phone and one cable is a
+complete act on that stage.
 
 **And be clear about whose it is.** The PA is the venue's. Everything else on
 that stage — amps, drums, mics, mixer, DI — belongs to the house band, in
@@ -503,8 +503,8 @@ Hosted by Nate Miller & the Turnups at Shoreline Brewery.
 Backline provided: guitar and bass amps, drums, mics, mixer,
 DI, PA. Show up with your instrument and nothing else.
 Own pedalboard or amp? Bring it.
-Playing to a backing track? Bring your phone — the cable and
-the adapters are already at the board.
+Playing to a backing track? Bring your phone and a cable
+ending in a male XLR or 1/4" plug.
 
 TONIGHT'S SHAPE
 7:00  House band opens
@@ -572,6 +572,10 @@ reason to come back and bring people; an act that played to a room and vanished
 doesn't. That's the difference the recap is actually making.
 
 ### Backing tracks are a decision, not a purchase
+
+> **Decided (2026-10-15):** performers bring their own connection to the mixer,
+> ending in a male XLR or 1/4" plug. Anyone who can't contacts us beforehand to
+> work out support. The house-cable recommendation below is kept for reference.
 
 "Sometimes they play to a backing track" sounds like a gear problem and isn't —
 the board already takes a cable, Bluetooth or USB, and there's a venue PA behind
@@ -670,8 +674,8 @@ The fields that actually matter:
 - Anything you need beyond the standard backline, and whether you're bringing
   your own amp or pedalboard (so there's room and a channel for it)
 - **Playing to a backing track?** If so, what it plays from — phone, laptop —
-  and whether it has a headphone jack or needs an adapter. Default answer is the
-  house cable; Bluetooth on request
+  and whether they have a cable ending in a male XLR or 1/4" plug. If not, we
+  follow up before the night
 - Two or three songs you'd like to play — **with keys**
 - **A link to your page**, if you have one, so the recap can tag you properly
 - First time here? (yes / no)
