@@ -51,7 +51,7 @@ The House Band includes seasoned *working* musicians:
 Bonus points they work together and teach at a local music store.
 
 The gear is modern, and it comes from two places. The **venue provides the PA**. Everything
-else — guitar and bass amps, keys, drums, mics, mixer and bass/guitar FX/amp/cab DI — is
+else — guitar and bass amps, drums, mics, mixer and bass/guitar FX/amp/cab DI — is
 **provided by the house band**, in practice by the coordinator and the bass player personally.
 That gear is hauled in, set up, torn down and hauled back out every Tuesday by the same two
 people. Worth stating plainly on both counts: neither contribution is visible anywhere online,

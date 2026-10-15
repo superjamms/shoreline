@@ -151,8 +151,8 @@ never done this*. Something closer to this:
 Open Jam at Shoreline Brewery — every Tuesday, 7:00 PM.
 Hosted by Nate Miller & the Turnups.
 
-Full backline provided: guitar and bass amps, keys, drums,
-mics, mixer, DI, and the house PA. Bring your instrument —
+Full backline provided: guitar and bass amps, drums, mics,
+mixer, DI, and the house PA. Bring your instrument —
 that's genuinely all you need. Prefer your own pedalboard or
 amp? Bring it, we'll make room.
 
@@ -180,8 +180,8 @@ the venue's events page in the interim if the jam page isn't up yet; don't leave
 the line reading `[link]`.
 
 **Don't bury the backline.** The gear list reads like housekeeping and isn't —
-it's the single most persuasive fact the page has. A full backline with keys, DI
-and a house PA means a keys player can turn up carrying nothing at all, and a
+it's the single most persuasive fact the page has. A full backline with amps, drums,
+DI and a house PA means a drummer can turn up carrying nothing but sticks, and a
 guitarist needs one hand free. "Bring your instrument, that's it" removes the
 actual reason most people who think about coming don't, which is the logistics of
 hauling gear to a bar on a work night for a slot they aren't sure they'll get.
@@ -192,7 +192,7 @@ promise to solo acts: a singer with tracks on their phone is a complete act on
 that stage without carrying anything either.
 
 **And be clear about whose it is.** The PA is the venue's. Everything else on
-that stage — amps, keys, drums, mics, mixer, DI — belongs to the house band, in
+that stage — amps, drums, mics, mixer, DI — belongs to the house band, in
 practice to the coordinator and the bass player personally. That matters twice
 over. It's a substantial contribution from both parties that nothing online
 mentions, which makes it exactly the sort of thing the partner credits in the
@@ -500,8 +500,8 @@ one of those needs slot times published. §3 is the breakdown.
 Open Jam — every Tuesday, 7:00 PM. Free.
 Hosted by Nate Miller & the Turnups at Shoreline Brewery.
 
-Backline provided: guitar and bass amps, keys, drums, mics,
-mixer, DI, PA. Show up with your instrument and nothing else.
+Backline provided: guitar and bass amps, drums, mics, mixer,
+DI, PA. Show up with your instrument and nothing else.
 Own pedalboard or amp? Bring it.
 Playing to a backing track? Bring your phone — the cable and
 the adapters are already at the board.

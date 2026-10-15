@@ -98,8 +98,8 @@ stage.*
 
 ::: cards
 - **Provided — PA** — The venue's system, indoor or outdoor depending on the season.
-- **Provided — backline** — Guitar and bass amps, keys, drums, mics, mixer, and DI. All of it belongs to the house band.
-- **Bring — your instrument** — Guitar, bass, horn, whatever you play. Plus sticks if you're particular about them.
+- **Provided — backline** — Guitar and bass amps, drums, mics, mixer, and DI. All of it belongs to the house band.
+- **Bring — your instrument** — Guitar, bass, keyboard, horn, whatever you play. Plus sticks if you're particular about them.
 - **Optional — your own rig** — Pedalboards and amps are welcome if you'd rather use yours.
 - **Optional — a backing track** — On a phone or laptop with a headphone or USB-C out. Have it cued before you're up.
 - **Not needed — a PA, stands, or cables** — Already handled.

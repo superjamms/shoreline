@@ -41,8 +41,8 @@ other people can do that too, without having brought anyone with them.
 
 ## The backline is provided
 
-The venue provides the PA. Everything else — guitar and bass amps, keys, drums,
-mics, mixer, and DI for bass and guitar — is provided by the house band, hauled
+The venue provides the PA. Everything else — guitar and bass amps, drums, mics,
+mixer, and DI for bass and guitar — is provided by the house band, hauled
 in and set up every Tuesday.
 
 That means a sit-in only has to bring an instrument that isn't already on stage.
