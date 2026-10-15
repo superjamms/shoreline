@@ -48,7 +48,7 @@ Short answer, optional.
 
 ### Event date you want to attend
 
-Dropdown, required.
+Multiple choice, required.
 
 - October 20, 2026
 - October 27, 2026
@@ -67,7 +67,7 @@ Checkboxes, required.
 
 Multiple choice, required. Branches on the answer:
 
-> Answer "Yes" if you want the house band to back a set you're performing.
+> Answer "Yes" if you want the house band to back a song or set you're performing.
 >
 > Answer "No" if you're bringing your own band or just jamming. You can add jam song requests on the next page.
 
@@ -76,12 +76,11 @@ Multiple choice, required. Branches on the answer:
 
 ## Section 3: Set List Support
 
-We need some information if you have a specific set list you need supported by the house backing band.
-If you skipped the email question, use Back to add it. We can't prepare your set without a way to reach you.
+The house band needs your songs as early as possible to decide what they can cover and prepare.
 
-While the house band includes seasoned musicians, they need to know as early as possible what you want covered so they can determine whether they can cover it, and sufficient time to prepare.
+Skipped the email question? Use Back to add it. We can't prepare your set without a way to reach you.
 
-You can also message us directly on the Shoreline Brewery Open Jam Facebook page or email at <admin@superjamm.live>
+Or you can just contact us at the Shoreline Brewery Open Jam Facebook page or email <admin@superjamm.live>.
 
 Continues to Section 4: Other Event Details.
 
@@ -89,7 +88,11 @@ Continues to Section 4: Other Event Details.
 
 Paragraph, required.
 
-> What song list do you plan to play and need covered? Include song titles, artists, and keys in which you intend to play them
+> What song list do you plan to play and need covered?
+>
+> One song per line: Title | Artist | Key
+>
+> Example: Mustang Sally | Wilson Pickett | C
 
 ### Do you have digital charts or chord sheets available to share?  If so, provide links here
 
@@ -111,7 +114,7 @@ Checkboxes, required.
 
 ### What instruments will you be playing?
 
-Checkboxes, optional.
+Checkboxes, required.
 
 - Vocals
 - Guitar
@@ -125,7 +128,7 @@ Checkboxes, optional.
 
 Multiple choice, optional.
 
-> If you need to play a backing track for your performance, we prefer you bring your own device, such as a smartphone, tablet or laptop. We will need to plug into our mixer, preferably via XLR or 1/4" monos. If you need help with alternative connectivity, contact us through our Shoreline Brewery Open Jam Facebook page or email us at <admin@superjamm.live>
+> Bring it on your phone, tablet or laptop. We connect via XLR or 1/4". Need a different connection? Contact us first at the Shoreline Brewery Open Jam Facebook page or email <admin@superjamm.live>.
 
 - Yes
 - No
@@ -138,8 +141,7 @@ Checkboxes, optional.
 >
 > Shoreline provides the PA.
 >
-> For most cases it will be good enough so you just bring an instrument, and plug in.
-> But we understand if you have special needs and will do our best to accommodate you.
+> Most players just bring an instrument and plug in.
 
 - Pedalboard
 - Amp/Cab
@@ -152,6 +154,10 @@ Checkboxes, optional.
 Paragraph, optional.
 
 > If you plan on sitting in during the open jam and have some song or genre preferences, add here.
+>
+> One song per line: Title | Artist | Key (optional)
+>
+> Example: Mustang Sally | Wilson Pickett | C
 >
 > This does not guarantee they will be covered on event night, but will help with planning.
 
