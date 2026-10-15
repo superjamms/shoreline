@@ -14,7 +14,7 @@ description: What to expect at the Shoreline Brewery open jam — the running or
 - **Doors / setup** — Gear load-in, setup and check-ins happen before the start time
 - **House band set** — About half an hour to open the night
 - **Then** — Guest bands, soloists and walk-ins, in whatever order the night takes
-- **Sign-up** — *Online signup coming soon...*
+- **Sign-up** — Sign up form is [here](https://forms.gle/bVGYV88FbMveXuuQ7).
 :::
 
 === block
@@ -67,10 +67,20 @@ gaps.
 
 ## How to get a slot
 
+Sign up [here](https://forms.gle/bVGYV88FbMveXuuQ7) as early as possible, especially if you plan on playing a formal setlist.
+Some nights are light, some are really busy.  We can forecast your needs better the further in advance we known.
+
+If online forms are not your thing, we get it.
+You can reach out to us on You can reach out to us at the [Shoreline Brewery Open Jam Facebook page](https://www.facebook.com/shorelineopenjam/) or email directly at [admin@superjamm.live](emailto:admin@superjamm.live).
+
+Worst case you can just show up and we'll figure a way to get you to play, especially if you're doing solo requiring no support, or willing to play whatever comes up in the open jam.
+
+The following are details specific to the types of performers we normally get:
+
 ::: numbers
-1. **Bands** — get in touch ahead of time. Band sets need to be planned around changeovers, so this is the one that really wants notice.
-2. **Soloists** — sign up on the night, or ahead of time once the signup form is up. Say whether you're bringing a backing track or want the house band behind you.
-3. **Walk-ins** — just tell the house band you want to play. That's the whole process.
+1. **Bands** — Band sets need to be planned around changeovers, so this is the one that really needs advanced notice if you want quality play time or support from the house band.
+2. **Soloists** — We'll need to know if you're bringing a backing track or backing from the house band.
+3. **Walk-ins** — just tell the house band you want to play. That's the whole process.  If you are locked into a specific repertoire, are a jam newcomer, or beginning musician, it is better to sign up early - the house band and regulars will help you out.
 :::
 
 ::: callout
@@ -97,6 +107,28 @@ stage.*
 
 === block
 
+^ What happens before, what happens after?
+
+## Forecast
+
+We'll try to forecast the events as early as practical.
+
+As of now, we'll accept sign ups up to a month in advance.
+You'll see on the *Events* page, as well as links to the forecasted event details, and recaps of previous events.
+
+As we get request details, we'll post on the associated date event pages so interested parties can check.
+For signups that want to remain anonyomous we'll honor that by not sharing names or contact details.
+
+This will be a good place to check for open jam requests, and potential for networking.
+
+## Recap
+
+After each event we'll post short recaps, including who playing, and maybe some video too.
+We'll check with who plays - those who want to remain anonymous, we'll make sure your contact details don't show on the list.
+You can also specify if you want to remain anonymous if you are using the [sign up form](https://forms.gle/bVGYV88FbMveXuuQ7)
+
+=== block
+
 ^ First time
 
 ## If you've never been
@@ -106,9 +138,13 @@ the house band and say what you'd like to do. Tell them your instrument and
 whether you have something specific you want to play — that's enough for them
 to slot you in.
 
-You don't need a set worked out, and you don't need to be good. The house band
+You don't need a set worked out, and you don't need to be "good". The house band
 are working musicians who spend their week adapting to other people's playing;
-sitting in with someone new is the normal case, not a favour.
+sitting in with someone new is the normal case, not a favor.
+
+It is typical to have regulars that proficient musicians, they'll jump at the chance to help you out too.
+
+You can reach out to us on You can reach out to us at the [Shoreline Brewery Open Jam Facebook page](https://www.facebook.com/shorelineopenjam/) or email directly at [admin@superjamm.live](emailto:admin@superjamm.live).
 
 ::: kicker
 The uncertainty is the fun part. Figuring out on the fly what to play with
@@ -122,8 +158,7 @@ people you've just met is what makes it a jam instead of a recital.
 ## Coming Soon...
 
 ::: numbers
-1. **A signup list** — so you can communicate before Tuesday if you have something specific to what you want to play, as a soloist, with a band, or in a jam.
-2. **A songlist** — what the house band can back you on, so the answer isn't a guess.
+1. **A songlist** — what the house band can back you on, so the answer isn't a guess.
 :::
 
 Neither replaces the walk-in. Turning up with nothing arranged will always work
@@ -132,4 +167,4 @@ here, although early signup helps immensely when you already know wnat you want 
 === footer
 
 Questions, or want a slot for your band? Reach the jam through the
-[Open Jam Facebook page](https://www.facebook.com/shorelineopenjam).
+[Open Jam Facebook page](https://www.facebook.com/shorelineopenjam) or via email at [admin@superjamm.live](emailto:admin@superjamm.live).
