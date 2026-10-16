@@ -102,8 +102,12 @@ def inline(text):
 
 
 def external(href):
-    """Off-site links open in a new tab; internal ones don't."""
-    if href.startswith(("http://", "https://")):
+    """Off-site links open in a new tab; internal ones don't.
+
+    '/signup/' is local only to keep the form's URL in one place — it redirects
+    straight to the Google Form, so treat it like the off-site link it is.
+    """
+    if href.startswith(("http://", "https://", "/signup/")):
         return ' target="_blank" rel="noopener"'
     return ""
 

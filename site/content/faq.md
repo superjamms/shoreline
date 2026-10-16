@@ -41,7 +41,7 @@ but also common to see solo and bands covering metal, funk or classical.
 The short answer is "it depends".
 
 If you have specific song requests that would make or break your night,
-it is best to request early via the [online sign up form](https://forms.gle/bVGYV88FbMveXuuQ7) or contact us on our [Facebook page](https://www.facebook.com/shorelineopenjam).
+it is best to request early via the [online sign up form](/signup/) or contact us on our [Facebook page](https://www.facebook.com/shorelineopenjam).
 
 We are working up a common song list based on previous jam set lists.
 Once we post out, you will be able to see what we can confidently cover.
@@ -60,7 +60,7 @@ Sign up ahead if you want to play specific songs, need the house band to back yo
 
 Sets are capped at 20 minutes and other players have plans too, so earlier is better.
 
-- Best: the online [sign-up form](https://forms.gle/bVGYV88FbMveXuuQ7) or our [Facebook page](https://www.facebook.com/shorelineopenjam).
+- Best: the online [sign-up form](/signup/) or our [Facebook page](https://www.facebook.com/shorelineopenjam).
 - Next best: ask for the coordinator when you arrive, ideally before 7 pm.
 - Arriving late? You can probably still join the open jam. Find the coordinator and we'll fit you in.
 

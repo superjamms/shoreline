@@ -72,6 +72,12 @@ relatively, so the subdirectory is fine and so is a custom domain later.
 `docs/CNAME` once; `build.py` only overwrites the files it generates, so it
 survives rebuilds.
 
+`docs/signup/index.html` is hand-kept the same way: a redirect page so
+`shoreline.superjamm.live/signup` (easy to say out loud or print on a flyer)
+lands on the Google sign-up form. Pages can't do server-side redirects, so it
+uses a meta refresh. Content links to the form as `/signup/`, so this page is
+the only place the form's URL lives — if it changes, edit it here.
+
 `docs/.nojekyll` is generated too. It tells Pages to serve these files as-is
 instead of running Jekyll over them.
 

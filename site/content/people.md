@@ -22,7 +22,7 @@ description: Coordinators, house band, regular bands and regulars make the Open 
 
 ::: cards
 - ![Nate Miller](pics/nate.jpg) **Nate Miller** — Jam Coordinator - If you're walking in for the Open Jam, talk to Nate during the setup/signup times,
-he'll get you a slot.  We prefer you sign up before though, especially if you needing backing support.  See the signup [here](https://forms.gle/bVGYV88FbMveXuuQ7)
+he'll get you a slot.  We prefer you sign up before though, especially if you needing backing support.  See the signup [here](/signup/)
 - **Caselle Brennae** — Venue Coordinator
 :::
 

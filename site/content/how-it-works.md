@@ -14,7 +14,7 @@ description: What to expect at the Shoreline Brewery open jam — the running or
 - **Doors / setup** — Gear load-in, setup and check-ins happen before the start time
 - **House band set** — About half an hour to open the night
 - **Then** — Guest bands, soloists and walk-ins, in whatever order the night takes
-- **Sign-up** — Sign up form is [here](https://forms.gle/bVGYV88FbMveXuuQ7).
+- **Sign-up** — Sign up form is [here](/signup/).
 :::
 
 === block
@@ -67,7 +67,7 @@ gaps.
 
 ## How to get a slot
 
-Sign up [here](https://forms.gle/bVGYV88FbMveXuuQ7) as early as possible, especially if you plan on playing a formal setlist.
+Sign up [here](/signup/) as early as possible, especially if you plan on playing a formal setlist.
 
 Some nights are light, some are really busy.  We can forecast your needs better the further in advance we know.
 

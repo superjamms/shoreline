@@ -20,7 +20,7 @@ empty: The next dates go up here as they're set. It's every Tuesday either way.
 
 ::: callout
 Want a band set, or a specific song backed by the house band? Say so before the
-night through [signup form here](https://forms.gle/bVGYV88FbMveXuuQ7),
+night through [signup form here](/signup/),
 or reach out to us at the [Open Jam Facebook page](https://www.facebook.com/shorelineopenjam) —
 band sets get planned around changeovers, and a song request with a key attached
 is a much faster "yes".
