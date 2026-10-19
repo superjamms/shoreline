@@ -819,10 +819,24 @@ def load_pages():
     return pages, events
 
 
+# Nav entries that aren't built from content/, slotted in among the pages by
+# `order`. One that shares an order with a page lands right after it.
+NAV_LINKS = [
+    {"nav": "Sign up", "href": "/signup/", "order": 2},
+]
+
+
 def render_nav(pages, current):
+    entries = [p for p in pages if not p["draft"]] + NAV_LINKS
+    entries.sort(key=lambda e: e["order"])  # stable: pages keep their ranking
     items = []
-    for page in pages:
-        if page["draft"]:
+    for page in entries:
+        if page in NAV_LINKS:
+            href = (current["root"] + page["href"].lstrip("/")) or "./"
+            items.append(
+                f'<a href="{html.escape(href, quote=True)}"{external(page["href"])}>'
+                f'{html.escape(page["nav"])}</a>'
+            )
             continue
         lit = page is current or (current["parent"] and page["slug"] == current["parent"])
         here = ' aria-current="page"' if lit else ""
