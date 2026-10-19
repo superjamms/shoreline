@@ -141,6 +141,9 @@ the partnerships are conversations, not projects.
 Pick the real start time and push it to the Page bio, every event, the venue's
 website, and any directory listing reachable. One canonical number.
 
+**Settled: 7:30 PM**, with load-in and sign-up from about 6:45. That's what the
+site says; the templates below use it.
+
 ### Rewrite the bio
 
 The current bio is four sentences that say when and what. It doesn't answer the
@@ -148,7 +151,7 @@ question an actual newcomer has, which is *what happens if I show up and I've
 never done this*. Something closer to this:
 
 ```
-Open Jam at Shoreline Brewery — every Tuesday, 7:00 PM.
+Open Jam at Shoreline Brewery — every Tuesday, 7:30 PM.
 Hosted by Nate Miller & the Turnups.
 
 Full backline provided: guitar and bass amps, drums, mics,
@@ -169,7 +172,7 @@ comfortable. You don't need a band, a set, or gear.
 Hosted at Shoreline Brewery. Players and student bands from
 Roxy Music always welcome.
 
-How it works, songlist and signup → [jam page link]
+How it works, songlist and signup → https://shoreline.superjamm.live/
 208 W. Wabash St, Michigan City, IN
 ```
 
@@ -497,7 +500,7 @@ one of those needs slot times published. §3 is the breakdown.
 ### Reusable event description
 
 ```
-Open Jam — every Tuesday, 7:00 PM. Free.
+Open Jam — every Tuesday, 7:30 PM. Free.
 Hosted by Nate Miller & the Turnups at Shoreline Brewery.
 
 Backline provided: guitar and bass amps, drums, mics, mixer,
@@ -507,16 +510,16 @@ Playing to a backing track? Bring your phone and a cable
 ending in a male XLR or 1/4" plug.
 
 TONIGHT'S SHAPE
-7:00  House band opens
-7:40  Solo slots and sit-ins, 15-20 min each
-9:00  Band slots
+6:45  Load-in and sign-up
+7:30  House band opens
+8:00  Guest bands, solo spots and the open jam, until close to 10
 
 Play your own set, sit in with the Turnups, or tell us you're
 looking to jam and we'll put you with people.
 
-SIGN UP (optional, walk-ins always welcome) → [form link]
-WHAT WE KNOW HOW TO BACK → [songlist link]
-EVERYTHING ELSE → [jam page link]
+SIGN UP (optional, walk-ins always welcome) → https://shoreline.superjamm.live/signup/
+WHAT WE KNOW HOW TO BACK → https://shoreline.superjamm.live/songlist.html
+EVERYTHING ELSE → https://shoreline.superjamm.live/
 
 First time? Just come. Tell us at the bar.
 ```
@@ -805,6 +808,39 @@ or the format changes, it changes in both places on the same day.
 | **Tue PM** | **Day-of post.** Signup link, tonight's shape, anything special — a visiting band, a theme, a birthday. |
 | **During** | **One photo, one clip, the songs.** A 30–60 second clip is enough. Jot song titles as they go by; that's the log. |
 | **Wednesday** | **Recap — and tag everyone.** The clip, the night's setlist, and every performer tagged by name and linked to their own page. Tag the partners too: Shoreline every week, and Roxy Music whenever one of their student-program acts played. Tagging is the growth engine: it puts the jam in front of each player's friends, which is exactly the audience a stale follower list is missing. It's also the page's half of the cross-promotion trade (§3) — the reason an act comes back and brings people. |
+
+### Weekly post template
+
+The Sunday reminder and the Tuesday day-of post are the same post. On Tuesday,
+change the first line to *Open Jam TONIGHT, 7:30 pm…*. Each week, change only the
+date, the *this week* line and the event link, so regulars recognize it on sight.
+
+The first three lines are what shows before *See more* (~250 characters), so the
+hook, the time and the sign-up link all sit there. Facebook only makes bare URLs
+clickable, so every link is written out in full.
+
+```
+🎸 Open Jam this Tuesday, [MONTH DAY] — 7:30 pm at Shoreline Brewery.
+Want the house band to back you? Sign up ahead: https://shoreline.superjamm.live/signup/
+Walk-ins always welcome.
+
+Backline's already on stage — amps, drums, mics, PA. Bring your instrument and that's it.
+
+Play a solo spot, sit in with the Turnups, bring your band, or just tell us you want to jam and we'll put you with people.
+
+When you sign up, name the song AND the key — the answer is a lot more likely to be yes.
+See what we play: https://shoreline.superjamm.live/songlist.html
+
+[THIS WEEK: visiting band / theme / birthday — or delete this line]
+
+Night details: https://shoreline.superjamm.live/events/[YYYY-M-D].html
+📍 208 W. Wabash St, Michigan City · Free to play, free to watch
+```
+
+Copy the event link from the Events page rather than typing it: the filenames
+don't zero-pad single-digit months or days (`2026-9-22`, `2026-10-20`). Attach a
+photo or clip from last week's recap; a post with a picture travels further than
+text alone.
 
 ---
 
