@@ -10,6 +10,7 @@ content/          the words                 <- edit these
   how-it-works.md   -> docs/how-it-works.html
   people.md         -> docs/people.html
   about.md          -> docs/about.html
+  songlist.md       -> docs/songlist.html     what the house band can back
   events/           one file per night      <- add one a week
     template.md       -> docs/events/template.html   (draft: copy this)
     2026-10-06.md     -> docs/events/2026-10-06.html
@@ -201,6 +202,7 @@ Each block renders a specific layout:
 | `kicker` | a paragraph | the italic closing line |
 | `video` | a list of `- **Caption** — youtube-url`, caption optional | embedded clips, two up, each with a link out to YouTube |
 | `setlist` | `### Act — kind` rows, each followed by `- Song · Artist · Key` items | the night's setlist, grouped by act |
+| `songlist` | a list of `- Artist · Song · Key`, key optional | the house band's songlist, one flat list in the order written |
 | `schedule` | `limit:` and `empty:` options | the upcoming nights, soonest first — built from `content/events/` |
 | `recaps` | `limit:` and `empty:` options | the past nights, most recent first — built from `content/events/` |
 
@@ -282,7 +284,6 @@ Marked `TODO` in the content, all of them waiting on decisions in
   other listings say 7:30 and the brewery's own page says 9:30. One of them wins
   and then it goes everywhere.
 - **The signup form URL** (PLAYBOOK §4), linked from `how-it-works.md`.
-- **The songlist URL** (PLAYBOOK §5), linked from the callout in `how-it-works.md`.
 - **The first real recap.** `content/events/` has the next six Tuesdays as
   upcoming dates and `template.md` as the shape a recap takes; no night has been
   written up yet, so both recap lists are showing their `empty:` line.

@@ -474,6 +474,34 @@ def render_setlist(lines, where):
     return '<div class="setlist">\n' + "\n".join(out) + "\n</div>"
 
 
+# ---------------- ::: songlist ----------------
+
+# What the house band can back you on — one flat list, not grouped by act:
+#
+#   - Wilson Pickett · Mustang Sally · C
+#
+# Artist first, because that's what the list is sorted by. Same separators as
+# ::: setlist; the key is optional. Rows render in the order they're written.
+SONGLIST_FIELDS = ("by", "song", "key")
+
+
+def render_songlist(lines, where):
+    rows = []
+    for item in list_items(lines):
+        fields = SONG_SEP_RE.split(item)
+        if len(fields) < 2 or not fields[0].strip() or not fields[1].strip():
+            sys.exit(f"{where}: ::: songlist — item needs 'Artist · Title':\n  {item[:70]}")
+        cells = [
+            f'<span class="song-{name}">{inline(value)}</span>'
+            for name, value in zip(SONGLIST_FIELDS, fields)
+            if value.strip()
+        ]
+        rows.append("<li>" + "".join(cells) + "</li>")
+    if not rows:
+        sys.exit(f"{where}: ::: songlist — no songs in the block")
+    return '<ul class="songs songlist">\n' + "\n".join(rows) + "\n</ul>"
+
+
 # ---------------- ::: schedule and ::: recaps ----------------
 #
 # The only two blocks that build themselves. They read the event pages rather
@@ -575,13 +603,14 @@ BLOCKS = {
     "steps": render_steps,
     "video": render_video,
     "setlist": render_setlist,
+    "songlist": render_songlist,
     "schedule": render_schedule,
     "recaps": render_recaps,
 }
 
-# These four need to know which file they came from, to report a bad link or a
+# These need to know which file they came from, to report a bad link or a
 # stray line against it; the older blocks can't fail in a way that needs it.
-BLOCKS_NEEDING_SOURCE = {"video", "setlist", "schedule", "recaps"}
+BLOCKS_NEEDING_SOURCE = {"video", "setlist", "songlist", "schedule", "recaps"}
 
 
 # The line-based directives, and the name each one carries. The space after the

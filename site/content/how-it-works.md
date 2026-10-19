@@ -87,10 +87,10 @@ The following are details specific to the types of performers we normally get:
 :::
 
 ::: callout
-If you want the house band to back you, name the song *and the key* when you
-sign up. They can cover a lot, but the answer is much faster — and much more
-likely to be yes — when they've seen the request before you're already on
-stage.
+If you want the house band to back you, check the [songlist](/songlist.html)
+first, then name the song *and the key* when you sign up. They can cover a lot,
+but the answer is much faster — and much more likely to be yes — when they've
+seen the request before you're already on stage.
 :::
 
 === block
@@ -154,13 +154,12 @@ people you've just met is what makes it a jam instead of a recital.
 
 === panel
 
-^ Still to come
+^ Want the house band behind you?
 
-## Coming Soon...
+## Check the songlist
 
-::: numbers
-1. **A songlist** — what the house band can back you on, so the answer isn't a guess.
-:::
+The [songlist](/songlist.html) is what the house band can back you on, so the
+answer isn't a guess.
 
 === footer
 

@@ -43,8 +43,7 @@ The short answer is "it depends".
 If you have specific song requests that would make or break your night,
 it is best to request early via the [online sign up form](/signup/) or contact us on our [Facebook page](https://www.facebook.com/shorelineopenjam).
 
-We are working up a common song list based on previous jam set lists.
-Once we post out, you will be able to see what we can confidently cover.
+Check the [songlist](/songlist.html) to see what we can confidently cover.
 
 On the other hand, the house band comprises seasoned musicians.
 If you come prepared with a chart, that may make the difference between a hard "no",

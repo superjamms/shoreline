@@ -692,6 +692,14 @@ code {
   border: 1px solid var(--rule);
 }
 
+/* ---------- ::: songlist ---------- */
+
+/* A reference list, not a running order — no counter, and the artist sits in
+   its own column so the titles line up. */
+.songlist li::before { content: none; }
+
+.songlist .song-by { flex: 0 0 11rem; }
+
 /* ---------- plain lists ---------- */
 
 section ul:not(.numbers):not(.list):not(.events),
@@ -796,6 +804,8 @@ section.footer {
   .events a { grid-template-columns: 4.5rem 1fr; gap: 0 0.9rem; }
   .events a::after { display: none; }
   .song-key { margin-left: 1.6rem; }
+  .songlist .song-by { flex-basis: 100%; }
+  .songlist .song-key { margin-left: auto; }
 }
 
 /* ---------- print ---------- */
