@@ -22,6 +22,8 @@ description: Songs the Shoreline Brewery open jam house band plays and can back 
 - Jimi Hendrix · Hey Joe
 - Jimi Hendrix · Little Wing
 - Led Zeppelin · Rock and Roll
+- Nirvana · Lithium
+- Nirvana · Something in the way
 - Radiohead · Creep
 - Rolling Stones · (I Can't Get No) Satisfaction
 - Rolling Stones · Dead Flowers
@@ -34,6 +36,7 @@ description: Songs the Shoreline Brewery open jam house band plays and can back 
 - Stevie Wonder · Superstition
 - Talking Heads · Psycho Killer
 - The Clovers · Love Potion #9
+- The Meters · Cissy Strut
 - The Who · Squeeze Box
 - Van Morrison · Brown Eyed Girl
 - Van Morrison · Moondance

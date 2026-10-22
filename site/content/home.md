@@ -25,6 +25,8 @@ description: Weekly open mic and open jam at Shoreline Brewery in Michigan City,
 
 ## Next few Tuesdays
 
+Note: The Open Mic/Jam event for November 3rd is cancelled - we'll continue November 10th.
+
 ::: schedule
 limit: 4
 empty: The next dates go up here as they're set. It's every Tuesday either way.
