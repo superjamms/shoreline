@@ -60,7 +60,7 @@ Sign up ahead if you want to play specific songs, need the house band to back yo
 Sets are capped at 20 minutes and other players have plans too, so earlier is better.
 
 - Best: the online [sign-up form](/signup/) or our [Facebook page](https://www.facebook.com/shorelineopenjam).
-- Next best: ask for the coordinator when you arrive, ideally before 7 pm.
+- Next best: ask for the coordinator when you arrive, ideally between 6:30 and 7 pm, before the house band starts.
 - Arriving late? You can probably still join the open jam. Find the coordinator and we'll fit you in.
 
 ## What gear do I need to bring?

@@ -28,20 +28,20 @@ wants, and that improvised quality is the point — but this is the shape it
 usually takes.
 
 ::: steps
-### Setup and checkin 6:45 pm
+### Setup and checkin 6:30 pm
 The house band sets up the backline.
 
 Coordinate with Nate for sign-in.
 If you're here for the jam, no worries if you miss the sign-in.
 You'll get a chance to sit in later.
-@ About 45 minutes
+@ About 30 minutes
 
-### The house band opens 7:30 pm
+### The house band opens 7 pm
 *The Turnups* work out a short set, about half an hour, and kick the night off.
 It also doubles as the sound check for everything that follows.
 @ About 30 minutes
 
-### Main event starts at 8 pm, ends roughly at 10 pm
+### Main event starts at 7:30 pm, ends at 9 pm
 
 #### Guest bands
 Full groups play short sets — covers, their own material, or both. A band

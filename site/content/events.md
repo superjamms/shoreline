@@ -3,7 +3,7 @@ slug: events
 order: 2
 nav: Events
 title: Dates and recaps
-eyebrow: Every Tuesday, 7:30 pm
+eyebrow: Every Tuesday, 7 pm
 standfirst: Every Tuesday night, before and after. Upcoming dates first, then the recaps — the clips from each night and what got played.
 description: Upcoming Shoreline Brewery open jam dates, plus recaps of past nights with video clips and the songs each band, soloist and open jam played.
 ---

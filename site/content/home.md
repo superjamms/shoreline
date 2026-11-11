@@ -4,7 +4,7 @@ slug: index
 order: 1
 nav: Home
 title: Open jam, every Tuesday
-eyebrow: 7:30 pm · Shoreline Brewery · Michigan City, IN
+eyebrow: 7 pm · Shoreline Brewery · Michigan City, IN
 standfirst: Show up.  Bring an instrument. Play.  We provide the rest.  Perform your own stuff solo, bring a band, or ask the house band to back you.
 We provide the backline, and Shoreline provides the PA.
 description: Weekly open mic and open jam at Shoreline Brewery in Michigan City, Indiana. Upcoming dates, recaps of past nights, and what to expect on your first one.
@@ -12,8 +12,14 @@ description: Weekly open mic and open jam at Shoreline Brewery in Michigan City,
 
 === block
 
+::: callout
+**New hours starting Tuesday, November 17.** Same night, earlier start:
+sign-in from about 6:30, the house band opens at 7, the floor opens at 7:30,
+and the night wraps up at 9.
+:::
+
 ::: facts
-- **When** — Every Tuesday, 7:30 pm Central
+- **When** — Every Tuesday, 7 pm Central
 - **Where** — Shoreline Brewery, 208 W. Wabash St, Michigan City, IN
 - **Cost** — Free to play, free to watch
 - **Bring** — Your instrument. Everything else is already there.
@@ -30,8 +36,8 @@ limit: 4
 empty: The next dates go up here as they're set. It's every Tuesday either way.
 :::
 
-Every date is the same night: the set up and walk-in sign ups start around 6:45, the house band
-opens at 7:30, and the floor is open from 8 until close to 10.
+Every date is the same night: the set up and walk-in sign ups start around 6:30, the house band
+opens at 7, and the floor is open from 7:30 until 9.
 [See all dates](/events.html)
 
 ::: callout
@@ -68,7 +74,7 @@ empty: The first recap goes up the morning after the next Tuesday.
 
 ::: numbers
 1. Read [how it works](/how-it-works.html) — five minutes, and you'll know what to expect.
-2. Come a little before 7:30 and find the house band during setup.
+2. Come a little before 7 and find the house band during setup.
 3. Play.
 :::
 

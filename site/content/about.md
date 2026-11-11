@@ -3,7 +3,7 @@ slug: about
 order: 5
 nav: About
 title: About the jam
-eyebrow: 7:30 pm every Tuesday · Michigan City, IN
+eyebrow: 7 pm every Tuesday · Michigan City, IN
 standfirst: An open mic and open jam at Shoreline Brewery, hosted by the house band. Play solo, sit in with the band, or bring your whole group. Backline provided — show up with an instrument and you can play.
 description: Weekly open mic and open jam at Shoreline Brewery in Michigan City, Indiana. Backline provided, house band hosts, all levels welcome.
 ---
@@ -11,7 +11,7 @@ description: Weekly open mic and open jam at Shoreline Brewery in Michigan City,
 === block
 
 ::: facts
-- **When** — Every Tuesday, 7:30 pm Central
+- **When** — Every Tuesday, 7 pm Central
 - **Where** — Shoreline Brewery, 208 W. Wabash St, Michigan City, IN
 - **Cost** — Free to play, free to watch, but drinks and food not included ;)
 - **Bring** — Your instrument. Everything else is already there.
