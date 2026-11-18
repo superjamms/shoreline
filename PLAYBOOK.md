@@ -418,9 +418,9 @@ So: one page, one owned URL. Not a site.
 | **Squarespace / Wix / Bandzoogle** | Easy | High | ~$10–25/mo | A monthly bill for a weekly jam with nothing to sell |
 
 **The recommendation: GitHub Pages, and it now exists.** `site/` renders
-Markdown into styled pages with no dependencies, and writes them into `docs/`,
-which is the folder GitHub Pages serves off `main`. Two pages are up — *About*
-and *How it works* — and a deploy is `python3 build.py` followed by a push. The
+Markdown into styled pages with no dependencies, and a GitHub Actions workflow
+builds and publishes them to GitHub Pages on every push to `main`. Two pages are up — *About*
+and *How it works* — and a deploy is just a push. The
 styling is borrowed from the brewery's own site so the two don't read as
 strangers: the orange and navy are sampled off the bowtie logo, and each of
 their Adobe Fonts faces is matched to a free equivalent. See

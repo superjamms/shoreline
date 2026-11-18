@@ -1,0 +1,53 @@
+# Build the site from site/ and publish it to GitHub Pages. Nothing generated is
+# committed: the output goes straight from this job to Pages as an artifact.
+#
+# Requires Settings -> Pages -> Build and deployment -> Source: GitHub Actions.
+#
+# The ::: schedule and ::: recaps lists are split on the build date, so an event
+# only moves from "upcoming" to "recaps" when build.py runs again. The nightly
+# run covers that: without it, the morning after a jam the site would still
+# advertise last night as upcoming until someone happened to push.
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # 10:00 UTC — early morning in Central time, so the roll-over has happened
+    # by the time anyone looks. GitHub may run a cron late under load.
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+
+# One deploy at a time. A push mid-deploy queues behind it rather than
+# cancelling a half-published site.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Render content into _site/
+        run: python3 site/build.py
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

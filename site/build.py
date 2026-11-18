@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
-"""Render content/*.md into the static site in docs/.
+"""Render content/*.md into the static site in _site/.
 
-    python3 build.py                  -> docs/, linking a shared style.css
-    python3 build.py --inline-css     -> docs/, with the CSS inlined per page
+    python3 build.py                  -> _site/, linking a shared style.css
+    python3 build.py --inline-css     -> _site/, with the CSS inlined per page
     python3 build.py -o /srv/www      -> somewhere else
 
-`docs/` is what GitHub Pages serves (Settings -> Pages -> Deploy from a branch ->
-main -> /docs). The output is committed, so a deploy is a `git push`.
+`_site/` is build output and isn't committed. .github/workflows/deploy.yml runs
+this script and hands `_site/` to GitHub Pages on every push to main.
 
-Run it again whenever the date rolls over, not just when the markdown changes:
-the ::: schedule and ::: recaps lists are split on TODAY at build time, so an
-event only moves from one list to the other on a rebuild. That's what
-.github/workflows/rebuild.yml does every morning.
+The site also needs rebuilding whenever the date rolls over, not just when the
+markdown changes: the ::: schedule and ::: recaps lists are split on TODAY at
+build time, so an event only moves from one list to the other on a rebuild.
+The same workflow runs every morning for that.
 
 Two kinds of page:
 
-    content/*.md         -> docs/*.html         one nav entry each
-    content/events/*.md  -> docs/events/*.html  one night each, kept out of the nav
+    content/*.md         -> _site/*.html         one nav entry each
+    content/events/*.md  -> _site/events/*.html  one night each, kept out of the nav
+
+Anything in static/ (CNAME, the /signup/ redirect) is copied over as-is.
 
 A file whose name starts with `_` is never built — that's how `_template.md`
 sits in `content/events/` as a thing to copy rather than a page.
@@ -50,7 +52,7 @@ import urllib.parse
 HERE = os.path.dirname(os.path.abspath(__file__))
 CONTENT = os.path.join(HERE, "content")
 EVENT_DIR = os.path.join(CONTENT, "events")
-DEFAULT_OUT = os.path.join(HERE, os.pardir, "docs")
+DEFAULT_OUT = os.path.join(HERE, os.pardir, "_site")
 
 # --------------------------------------------------------------------------
 # per-page render state
@@ -956,6 +958,14 @@ def build(args):
         shutil.copytree(pics, dest, dirs_exist_ok=True)
         written.extend(sorted(glob.glob(os.path.join(dest, "*"))))
 
+    # Hand-written files that aren't rendered from markdown: CNAME, redirects.
+    static = os.path.join(HERE, "static")
+    if os.path.isdir(static):
+        shutil.copytree(static, out_dir, dirs_exist_ok=True)
+        for dirpath, _, filenames in os.walk(static):
+            rel = os.path.relpath(dirpath, static)
+            written.extend(sorted(os.path.join(out_dir, rel, f) for f in filenames))
+
     # Tell GitHub Pages to serve these files as-is rather than run Jekyll over them.
     nojekyll = os.path.join(out_dir, ".nojekyll")
     if not os.path.exists(nojekyll):
@@ -974,7 +984,7 @@ def build(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("-o", "--out", help="output directory (default: ../docs)")
+    parser.add_argument("-o", "--out", help="output directory (default: ../_site)")
     parser.add_argument(
         "--inline-css",
         action="store_true",

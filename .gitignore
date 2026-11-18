@@ -19,5 +19,6 @@
 __pycache__/
 *.py[cod]
 
-# Generated build output — docs/ is NOT ignored; GitHub Pages serves the
-# committed files, so `site/build.py` output has to be checked in.
+# Generated build output — CI builds and deploys it (.github/workflows/deploy.yml)
+_site/
+docs/

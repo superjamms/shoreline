@@ -5,15 +5,16 @@ edited without touching the design.
 
 ```text
 content/          the words                 <- edit these
-  home.md           -> docs/index.html        the dashboard
-  events.md         -> docs/events.html       dates and recaps
-  how-it-works.md   -> docs/how-it-works.html
-  people.md         -> docs/people.html
-  about.md          -> docs/about.html
-  songlist.md       -> docs/songlist.html     what the house band can back
+  home.md           -> _site/index.html        the dashboard
+  events.md         -> _site/events.html       dates and recaps
+  how-it-works.md   -> _site/how-it-works.html
+  people.md         -> _site/people.html
+  about.md          -> _site/about.html
+  songlist.md       -> _site/songlist.html     what the house band can back
   events/           one file per night      <- add one a week
-    template.md       -> docs/events/template.html   (draft: copy this)
-    2026-10-06.md     -> docs/events/2026-10-06.html
+    template.md       -> _site/events/template.html   (draft: copy this)
+    2026-10-06.md     -> _site/events/2026-10-06.html
+static/           copied over as-is         <- CNAME, the /signup/ redirect
 style.css         the design                <- and this, to retune the look
 template.html     the page skeleton         <- nav, footer, <head>
 build.py          the renderer              <- no dependencies, stdlib only
@@ -23,14 +24,15 @@ Top-level pages each get a nav entry. Event pages don't — they're reached from
 the home page and from `events.html`, both of which build their lists from the
 files in `content/events/`.
 
-Output goes to **`../docs/`**, which is what GitHub Pages serves. It is generated
-— don't edit it — but it *is* committed, because Pages serves the committed files.
+Output goes to **`../_site/`**. It is generated and git-ignored: GitHub Actions
+builds it fresh on every push to `main` and publishes it to Pages, so there is
+nothing to build or commit by hand.
 
 ## Build
 
 ```sh
 cd site
-python3 build.py                # writes ../docs/
+python3 build.py                # writes ../_site/
 python3 build.py --inline-css   # same, but each page carries its own CSS
 python3 build.py -o /tmp/preview
 ```
@@ -41,10 +43,10 @@ can run it.
 To look at the result before pushing:
 
 ```sh
-python3 -m http.server -d ../docs 8000   # then open http://localhost:8000
+python3 -m http.server -d ../_site 8000   # then open http://localhost:8000
 ```
 
-Opening `docs/index.html` straight off disk mostly works too, but the `./` link
+Opening `_site/index.html` straight off disk mostly works too, but the `./` link
 on the wordmark needs a server to resolve.
 
 The one external request a page makes is to Google Fonts. To make the pages
@@ -55,37 +57,38 @@ fallback stacks in `style.css` take over.
 
 One-time, in the repo on github.com:
 
-**Settings → Pages → Build and deployment → Deploy from a branch → `main` / `/docs`**
+**Settings → Pages → Build and deployment → Source: GitHub Actions**
 
-After that a deploy is just:
+After that a deploy is just a push to `main`:
 
 ```sh
-cd site && python3 build.py
 git add -A && git commit -m "site: update" && git push
 ```
 
-The site appears at `https://<user>.github.io/shoreline/`. Everything is linked
-relatively, so the subdirectory is fine and so is a custom domain later.
+`.github/workflows/deploy.yml` runs `build.py` and publishes the result. It also
+runs every morning, because the upcoming/recaps split on the home and events
+pages depends on the date, and can be started by hand from the Actions tab
+(*Deploy site → Run workflow*).
 
-**For a custom domain** (PLAYBOOK.md argues for one — something like
-`shorelineopenjam.com`): add the domain under Settings → Pages, which writes a
-`CNAME` file. Put a copy at `site/CNAME`-adjacent — simplest is to commit
-`docs/CNAME` once; `build.py` only overwrites the files it generates, so it
-survives rebuilds.
+Everything is linked relatively, so the site works at
+`https://<user>.github.io/shoreline/` or on a custom domain.
 
-`docs/signup/index.html` is hand-kept the same way: a redirect page so
+**Custom domain:** set it under Settings → Pages. `static/CNAME` holds the same
+name so it is recorded in the repo too; if the domain changes, change both.
+
+`static/signup/index.html` is a redirect page so
 `shoreline.superjamm.live/signup` (easy to say out loud or print on a flyer)
 lands on the Google sign-up form. Pages can't do server-side redirects, so it
 uses a meta refresh. Content links to the form as `/signup/`, so this page is
 the only place the form's URL lives — if it changes, edit it here.
 
-`docs/.nojekyll` is generated too. It tells Pages to serve these files as-is
+`_site/.nojekyll` is generated too. It tells Pages to serve these files as-is
 instead of running Jekyll over them.
 
 ## Adding a page
 
 Drop a new file in `content/`. The filename becomes the URL, so
-`content/songlist.md` builds `docs/songlist.html`. A file whose name starts with
+`content/songlist.md` builds `_site/songlist.html`. A file whose name starts with
 `_` is skipped, so a scratch draft can sit in the folder without shipping.
 
 Frontmatter drives everything outside the body:
@@ -108,7 +111,7 @@ Exactly one page should carry `slug: index`, or the site root 404s. That's
 ## Adding an event
 
 One file per Tuesday, in `content/events/`. Name it for the date and the URL
-follows: `content/events/2026-10-13.md` builds `docs/events/2026-10-13.html`.
+follows: `content/events/2026-10-13.md` builds `_site/events/2026-10-13.html`.
 
 ```sh
 cp content/events/template.md content/events/2026-10-13.md
@@ -131,7 +134,7 @@ Plus `eyebrow`, `standfirst`, `description` and `draft`, which mean what they do
 on any other page. Before the night a page needs only `date`, `title` and `note`;
 the recap, the clips and the setlist go in the next morning.
 
-`content/events/template.md` is a live page — `docs/events/template.html` — that
+`content/events/template.md` is a live page — `_site/events/template.html` — that
 documents all of this and shows every block rendered. It carries `draft: true`,
 so it builds but is linked from nowhere.
 
